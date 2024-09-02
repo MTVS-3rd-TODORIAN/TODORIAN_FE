@@ -1,3 +1,4 @@
+// import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,7 +13,7 @@ const Main = () => {
       <Title>ToDorian</Title>
       <ContentContainer>
         <MenuButtonContainer>
-          <MenuButton onClick={() => navigate('/today-deal')}>오늘의 할인</MenuButton>
+          <MenuButton onClick={() => navigate('/today-deal')}>오늘의 할일</MenuButton>
           <MenuButton onClick={() => navigate('/calendar')}>달력</MenuButton>
           <MenuButton onClick={() => navigate('/feed')}>밥 주러 가기</MenuButton>
           <MenuButton onClick={() => navigate('/my-page')}>마이 페이지</MenuButton>
@@ -27,7 +28,7 @@ const Main = () => {
           <MenuButton onClick={() => navigate('/farm')}>농장</MenuButton>
           <MenuButton onClick={() => navigate('/closet')}>옷장</MenuButton>
           <MenuButton onClick={() => navigate('/friends')}>친구</MenuButton>
-          <MenuButton onClick={() => navigate('/play')}>게임하기</MenuButton>
+          <MenuButton onClick={() => navigate('/game')}>게임하기</MenuButton>
         </MenuButtonContainer>
       </ContentContainer>
     </MainContainer>
