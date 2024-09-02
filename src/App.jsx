@@ -5,6 +5,7 @@ import {
   Route
 } from 'react-router-dom';
 import Main from './pages/Main';
+import GameBrowser from './pages/Game';
 import Todo from './pages/todo/Todo';
 // Import other components for routing here...
 
@@ -13,6 +14,7 @@ function App() {
     <Routes>
       <>
         <Route path="/main" element={<Main/>}/>
+        <Route path="/game" element={<GameBrowser/>}/>
         <Route path="/today-deal" element={<Todo/>}/>
       </>
     </Routes>
