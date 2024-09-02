@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+import LadderImg from '../assets/images/gamePage/ladder.png';
+import SoccerBallImg from '../assets/images/gamePage/soccerBall.png'; 
+import BaseBallImg from '../assets/images/gamePage/baseBall.png';
+import ChickImg from '../assets/images/mainPage/mainChick.png';
+
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -108,14 +113,31 @@ const SpeechBubble = styled.div`
   }
 `;
 
-const games = [  { id: 1, title: "퍼즐 게임", image: "/placeholder.svg?height=150&width=200" },  { id: 2, title: "액션 게임", image: "/placeholder.svg?height=150&width=200" },  { id: 3, title: "전략 게임", image: "/placeholder.svg?height=150&width=200" },  { id: 4, title: "롤플레잉 게임", image: "/placeholder.svg?height=150&width=200" },  { id: 5, title: "시뮬레이션 게임", image: "/placeholder.svg?height=150&width=200" },  { id: 6, title: "스포츠 게임", image: "/placeholder.svg?height=150&width=200" },];
+// 사다리 게임
+const games = [
+  {
+    id: 1,
+    title: "사다리 게임",
+    image: LadderImg, // 수정된 부분
+  },
+  {
+    id: 2,
+    title: "야구 게임",
+    image: BaseBallImg,
+  },
+  {
+    id: 3,
+    title: "축구 게임",
+    image: SoccerBallImg,
+  }
+];
 
 export default function GameBrowser() {
   const [selectedGame, setSelectedGame] = useState(null);
 
   return (
     <MainContainer>
-      <Title>게임 브라우저</Title>
+      <Title>게임</Title>
       <ContentContainer>
         <GameGrid>
           {games.map((game) => (
@@ -126,7 +148,7 @@ export default function GameBrowser() {
           ))}
         </GameGrid>
         <ChickContainer>
-          <ChickImage src="/placeholder.svg?height=200&width=200" alt="Chick" />
+          <ChickImage src={ChickImg} alt="Chick" /> {/* ChickImg로 변경 */}
           <SpeechBubble>
             {selectedGame
               ? `${selectedGame.title}을(를) 선택하셨네요! 좋은 선택이에요!`
