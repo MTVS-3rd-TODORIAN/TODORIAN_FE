@@ -28,7 +28,7 @@ const Main = () => {
           <MenuButton onClick={() => navigate('/farm')}>농장</MenuButton>
           <MenuButton onClick={() => navigate('/closet')}>옷장</MenuButton>
           <MenuButton onClick={() => navigate('/friends')}>친구</MenuButton>
-          <MenuButton onClick={() => navigate('/play')}>게임하기</MenuButton>
+          <MenuButton onClick={() => navigate('/game')}>게임하기</MenuButton>
         </MenuButtonContainer>
       </ContentContainer>
     </MainContainer>
