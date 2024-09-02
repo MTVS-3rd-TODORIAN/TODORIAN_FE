@@ -4,6 +4,7 @@ import {
   Routes,
   Route
 } from 'react-router-dom';
+import Login from './pages/User/Login';
 import Main from './pages/Main';
 import GameBrowser from './pages/Game';
 import Todo from './pages/todo/Todo';
@@ -13,6 +14,7 @@ function App() {
   return (
     <Routes>
       <>
+        <Route path="/" element={<Login/>}/>
         <Route path="/main" element={<Main/>}/>
         <Route path="/game" element={<GameBrowser/>}/>
         <Route path="/today-deal" element={<Todo/>}/>
