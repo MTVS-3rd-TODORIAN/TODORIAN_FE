@@ -5,6 +5,7 @@ import {
   Route
 } from 'react-router-dom';
 import Main from './pages/Main';
+import GameBrowser from './pages/Game';
 // Import other components for routing here...
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
     <Routes>
       <>
         <Route path="/main" element={<Main/>}/>
+        <Route path="/game" element={<GameBrowser/>}/>
       </>
     </Routes>
   );
