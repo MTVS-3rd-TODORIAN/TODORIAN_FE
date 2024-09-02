@@ -1,4 +1,3 @@
-
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
@@ -18,12 +17,12 @@ const Main = () => {
           <MenuButton onClick={() => navigate('/feed')}>밥 주러 가기</MenuButton>
           <MenuButton onClick={() => navigate('/my-page')}>마이 페이지</MenuButton>
         </MenuButtonContainer>
-        <div>
+        <ChickContainer>
           <ChickImage src={ChickImg} alt="Chick" />
           <SpeechBubble>
             {userName}! 반가워!!<br />원하는 메뉴를 클릭해서 이동해 봐~
           </SpeechBubble>
-        </div>
+        </ChickContainer>
         <MenuButtonContainer>
           <MenuButton onClick={() => navigate('/farm')}>농장</MenuButton>
           <MenuButton onClick={() => navigate('/closet')}>옷장</MenuButton>
@@ -44,36 +43,42 @@ const MainContainer = styled.div`
   justify-content: center;
   height: 100vh;
   background-color: #f7f4f0;
+  padding: 0; /* 여백 제거 */
+  margin: 0; /* 여백 제거 */
+  overflow: hidden; /* 스크롤바 발생 방지 */
+  width: 100vw; /* 전체 뷰포트 너비 사용 */
 `;
 
 const Title = styled.h1`
-  font-size: 3rem;
+  font-size: 4rem;
   color: #d4886e;
   margin-bottom: 20px;
 `;
 
 const ContentContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* 공간을 균등하게 분배 */
   align-items: center;
-  width: 80%;
+  width: 100%;
+  max-width: 1200px;
 `;
 
 const MenuButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 20px;
+  padding: 0 20px; /* 좌우 여백 조정 */
 `;
 
 const MenuButton = styled.button`
-  width: 150px;
-  padding: 10px;
+  width: 200px;
+  padding: 15px;
   background-color: #f6b693;
   color: white;
   border: none;
   border-radius: 20px;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   cursor: pointer;
   transition: background-color 0.3s;
 
@@ -82,17 +87,26 @@ const MenuButton = styled.button`
   }
 `;
 
+const ChickContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+`;
+
 const ChickImage = styled.img`
-  width: 300px;
+  width: 400px;
+  margin-bottom: 20px;
 `;
 
 const SpeechBubble = styled.div`
   position: relative;
   background: #ffffff;
   border-radius: 10px;
-  width: 220px;
-  padding: 15px;
-  font-size: 1rem;
+  width: 250px;
+  padding: 20px;
+  font-size: 1.2rem;
   text-align: center;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 
