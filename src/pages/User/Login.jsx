@@ -1,8 +1,15 @@
-// import React from 'react';
+import { useNavigate } from 'react-router-dom';  // useNavigate 훅을 임포트
 import styled from 'styled-components';
 import ChickImg from '../../assets/images/mainPage/mainChick.png';
 
 const Login = () => {
+    
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    navigate('/main');  // '/main' 경로로 이동
+  };
+
   return (
     <LoginContainer>
       <Title>ToDorian</Title>
@@ -10,7 +17,7 @@ const Login = () => {
         <ChickImage src={ChickImg} alt="Chick" />
         <Input type="text" placeholder="아이디" />
         <Input type="password" placeholder="비밀번호" />
-        <LoginButton>로그인</LoginButton>
+        <LoginButton onClick={handleLogin}>로그인</LoginButton>
       </LoginForm>
     </LoginContainer>
   );
