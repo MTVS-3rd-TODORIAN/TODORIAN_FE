@@ -1,9 +1,12 @@
-import { useNavigate } from 'react-router-dom';  // useNavigate 훅을 임포트
+import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { login } from '../../api/auth';
 import styled from 'styled-components';
 import ChickImg from '../../assets/images/mainPage/mainChick.png';
 
 const Login = () => {
-    
+  
+  const { search } = useLocation();
   const navigate = useNavigate();
 
   const handleLogin = () => {
