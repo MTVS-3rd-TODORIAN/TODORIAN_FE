@@ -1,13 +1,24 @@
-import { useNavigate } from 'react-router-dom';  // useNavigate 훅을 임포트
+import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { login } from '../../api/auth';
 import styled from 'styled-components';
 import ChickImg from '../../assets/images/mainPage/mainChick.png';
 
 const Login = () => {
-    
+  
+  const { email, setEmail } = useState('');
+  const { password, setPassword } = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    navigate('/main');  // '/main' 경로로 이동
+  const handleLogin = async () => {
+    try {
+      const res = await login(email, password);
+      console.log('Login successful : ' + res);
+
+      navigate('/main');  // '/main' 경로로 이동
+    } catch (err) {
+      console.error('Login failed :'+ err);
+    }
   };
 
   return (
@@ -15,8 +26,18 @@ const Login = () => {
       <Title>ToDorian</Title>
       <LoginForm>
         <ChickImage src={ChickImg} alt="Chick" />
-        <Input type="text" placeholder="아이디" />
-        <Input type="password" placeholder="비밀번호" />
+        <Input 
+          type="email" 
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)} 
+        />
+        <Input 
+          type="password" 
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)} 
+        />
         <LoginButton onClick={handleLogin}>로그인</LoginButton>
       </LoginForm>
     </LoginContainer>
