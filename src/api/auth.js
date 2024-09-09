@@ -4,10 +4,15 @@ export const login = async (email, password) => {
 
   const baseURL = import.meta.env.VITE_BASE_URL;
 
-  const res = await axios.post(`${baseURL}/auth/login`, {
+  console.log('Login 요청 전송 전')
+
+  // authDTO 형식으로 요청 본문을 구성
+  const authDTO = {
     email: email,
-    password: password,
-  });
+    password: password
+  };
+
+  const res = await axios.post(`${baseURL}/auth/login`, authDTO); // authDTO 객체를 본문으로 전달
 
   const token = res.headers['Authorization'];
 

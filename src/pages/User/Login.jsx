@@ -5,19 +5,21 @@ import styled from 'styled-components';
 import ChickImg from '../../assets/images/mainPage/mainChick.png';
 
 const Login = () => {
-  
-  const { email, setEmail } = useState('');
-  const { password, setPassword } = useState('');
+  // useState 훅을 사용해 이메일과 비밀번호 상태 관리
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
+      // login 함수 호출하여 이메일과 비밀번호 전송
       const res = await login(email, password);
-      console.log('Login successful : ' + res);
+      console.log('Login successful:', res);
 
-      navigate('/main');  // '/main' 경로로 이동
+      // 로그인 성공 시 메인 페이지로 이동
+      navigate('/main');
     } catch (err) {
-      console.error('Login failed :'+ err);
+      console.error('Login failed:', err);
     }
   };
 
@@ -26,17 +28,17 @@ const Login = () => {
       <Title>ToDorian</Title>
       <LoginForm>
         <ChickImage src={ChickImg} alt="Chick" />
-        <Input 
-          type="email" 
+        <Input
+          type="email"
           placeholder="Email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)} 
+          onChange={(e) => setEmail(e.target.value)} // 이메일 입력 값 업데이트
         />
-        <Input 
-          type="password" 
+        <Input
+          type="password"
           placeholder="Password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)} 
+          onChange={(e) => setPassword(e.target.value)} // 비밀번호 입력 값 업데이트
         />
         <LoginButton onClick={handleLogin}>로그인</LoginButton>
       </LoginForm>
