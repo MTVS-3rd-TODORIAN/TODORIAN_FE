@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { login } from '../../api/auth';
 import styled from 'styled-components';
 import ChickImg from '../../assets/images/mainPage/mainChick.png';
