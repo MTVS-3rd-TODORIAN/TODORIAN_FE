@@ -11,6 +11,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
+    
     try {
       // login 함수 호출하여 이메일과 비밀번호 전송
       const res = await login(email, password);
