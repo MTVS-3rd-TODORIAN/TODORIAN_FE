@@ -6,7 +6,9 @@ const LogoutComponent = () => {
     const navigate = useNavigate();
   
     const handleLogout = () => {
-      logout(navigate);
+      logout();
+
+      navigate('/login');
     };
   
     return (

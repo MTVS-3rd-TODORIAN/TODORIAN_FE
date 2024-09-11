@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import ChickImg from '../../assets/images/mainPage/mainChick.png';
+import { signup } from '../../api/auth';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -11,15 +12,16 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const handleSignup = async () => {
+
     if (password !== confirmPassword) {
-      alert('비밀번호가 일치하지 않습니다.');
-      return;
+        alert('비밀번호가 일치하지 않습니다.');
+        return;
     }
 
     try {
       // 회원가입 API 호출
-      //const res = await signup(email, password, nickName);
-      //console.log('Signup successful:', res);
+      const res = await signup(nickName, email, password, confirmPassword);
+      console.log('Signup successful:', res);
 
       // 회원가입 성공 시 로그인 페이지로 이동
       navigate('/login');

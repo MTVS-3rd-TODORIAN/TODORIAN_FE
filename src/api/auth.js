@@ -3,6 +3,7 @@ import axios from 'axios';
 const baseURL = import.meta.env.VITE_BASE_URL;
 
 const storeTokens = (authorization, refreshToken) => {
+
   if (authorization && authorization.startsWith('Bearer ')) {
     const token = authorization.split(' ')[1];
     localStorage.setItem('token', token);
@@ -19,6 +20,20 @@ const storeTokens = (authorization, refreshToken) => {
     console.error('Refresh-Token 헤더에 토큰이 없습니다.');
   }
 };
+
+export const signup = async (nickName, email, password, confirmPassword) => {
+
+  const signUpDTO = {
+    nickName: nickName,
+    email: email,
+    password: password,
+    confirmPassword: confirmPassword
+  }
+
+  const res = await axios.post(`${baseURL}/auth/signup`, signUpDTO);
+
+  return res.data;
+}
 
 export const login = async (email, password) => {
 
@@ -60,7 +75,7 @@ export const getRefresh = async (refresh) => {
   }
 }
 
-export const logout = async (navigate) => {
+export const logout = async () => {
 
   // 1. 로컬 스토리지에서 토큰과 리프레시 토큰 삭제
   localStorage.removeItem('token');
@@ -74,7 +89,4 @@ export const logout = async (navigate) => {
   } catch (e) {
     console.error('서버 로그아웃 요청 중 에러 발생:', e);
   }
-
-  // 3. 로그인 페이지로 리다이렉트 (선택 사항)
-  navigate('/');
 }

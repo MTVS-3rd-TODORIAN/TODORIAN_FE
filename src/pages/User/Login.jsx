@@ -18,7 +18,7 @@ const Login = () => {
       console.log('Login successful:', res);
 
       // 로그인 성공 시 메인 페이지로 이동
-      navigate('/main');
+      navigate('/');
     } catch (err) {
       console.error('Login failed:', err);
     }
