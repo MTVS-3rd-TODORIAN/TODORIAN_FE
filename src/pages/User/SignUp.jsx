@@ -1,34 +1,39 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../../api/auth';
 import styled from 'styled-components';
 import ChickImg from '../../assets/images/mainPage/mainChick.png';
 
-const Login = () => {
-  // useState 훅을 사용해 이메일과 비밀번호 상태 관리
+const SignUp = () => {
+  // useState 훅을 사용해 회원 가입 정보 상태 관리
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [nickName, setNickName] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const handleSignup = async () => {
+    // 비밀번호 확인 로직
+    if (password !== confirmPassword) {
+      alert('비밀번호가 일치하지 않습니다.');
+      return;
+    }
 
     try {
-      // login 함수 호출하여 이메일과 비밀번호 전송
-      const res = await login(email, password);
-      console.log('Login successful:', res);
+      // 회원가입 API 호출
+      //const res = await signup(email, password, nickName);
+      //console.log('Signup successful:', res);
 
-      // 로그인 성공 시 메인 페이지로 이동
-      navigate('/main');
+      // 회원가입 성공 시 로그인 페이지로 이동
+      navigate('/login');
     } catch (err) {
-      console.error('Login failed:', err);
+      console.error('Signup failed:', err);
     }
   };
 
   return (
-    <LoginContainer>
-      <LoginForm>
-      <Title>ToDorian</Title>
-      <InputForm>
+    <SignupContainer>
+      <Title>회원가입</Title>
+      <SignupForm>
         <ChickImage src={ChickImg} alt="Chick" />
         <Input
           type="email"
@@ -37,61 +42,63 @@ const Login = () => {
           onChange={(e) => setEmail(e.target.value)} // 이메일 입력 값 업데이트
         />
         <Input
+          type="text"
+          placeholder="Nickname"
+          value={nickName}
+          onChange={(e) => setNickName(e.target.value)} // 닉네임 입력 값 업데이트
+        />
+        <Input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)} // 비밀번호 입력 값 업데이트
         />
-        <LoginButton onClick={handleLogin}>로그인</LoginButton>
-      </InputForm>
-      </LoginForm>
-    </LoginContainer>
+        <Input
+          type="password"
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)} // 비밀번호 확인 입력 값 업데이트
+        />
+        <SignupButton onClick={handleSignup}>회원가입</SignupButton>
+      </SignupForm>
+    </SignupContainer>
   );
 };
 
-export default Login;
+export default SignUp;
 
-const LoginContainer = styled.div`
+const SignupContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   background-color: #f7f4f0;
-  padding: 0; 
-  margin: 0; 
+  padding: 0;
+  margin: 0;
 `;
 
 const Title = styled.h1`
-  font-size: 5rem;  /* 제목을 더 크게 조정 */
+  font-size: 6rem;
   color: #d4886e;
   margin-bottom: 30px;
 `;
 
-const LoginForm = styled.div`
-  height: 100%;
-  width: 100%;
+const SignupForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* 부모 요소에서 자식들을 가운데 정렬 */
   background-color: #fff6e6;
   padding: 50px;
   border-radius: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-`;
-
-const InputForm = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* 수평 가운데 정렬 */
-  justify-content: center; /* 수직 가운데 정렬 */
-  width: 30%;
+  width: 100%;
+  max-width: 500px;
 `;
 
 const ChickImage = styled.img`
-  width: 250px; /* 이미지를 더 크게 조정 */
+  width: 250px;
   margin-bottom: 30px;
 `;
 
@@ -101,18 +108,17 @@ const Input = styled.input`
   margin: 15px 0;
   border-radius: 5px;
   border: 1px solid #ddd;
-  box-sizing: border-box;
-  font-size: 1.2rem; /* 폰트 크기를 조금 더 키움 */
+  font-size: 1.2rem;
 `;
 
-const LoginButton = styled.button`
+const SignupButton = styled.button`
   width: 100%;
   padding: 15px;
   background-color: #ffd233;
   color: white;
   border: none;
   border-radius: 5px;
-  font-size: 1.5rem; /* 버튼 텍스트를 더 크게 조정 */
+  font-size: 1.5rem;
   cursor: pointer;
   transition: background-color 0.3s;
 
