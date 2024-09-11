@@ -41,6 +41,7 @@ axiosInstance.interceptors.response.use(
         originalConfig.headers['Authorization'] = `Bearer ${res.data.token}`;
         return axiosInstance(originalConfig);
       } catch (e) {
+        console.error(e);  // 에러 로그 출력
         localStorage.removeItem('token');
         localStorage.removeItem('refresh');
         alert('토큰이 만료되었습니다. 다시 로그인 해주세요.');
