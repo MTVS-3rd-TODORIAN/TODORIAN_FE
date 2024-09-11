@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import ChickImg from '../../assets/images/mainPage/mainChick.png';
 
 const SignUp = () => {
-  // useState 훅을 사용해 회원 가입 정보 상태 관리
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -12,7 +11,6 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const handleSignup = async () => {
-    // 비밀번호 확인 로직
     if (password !== confirmPassword) {
       alert('비밀번호가 일치하지 않습니다.');
       return;
@@ -32,34 +30,36 @@ const SignUp = () => {
 
   return (
     <SignupContainer>
-      <Title>회원가입</Title>
       <SignupForm>
-        <ChickImage src={ChickImg} alt="Chick" />
-        <Input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)} // 이메일 입력 값 업데이트
-        />
-        <Input
-          type="text"
-          placeholder="Nickname"
-          value={nickName}
-          onChange={(e) => setNickName(e.target.value)} // 닉네임 입력 값 업데이트
-        />
-        <Input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)} // 비밀번호 입력 값 업데이트
-        />
-        <Input
-          type="password"
-          placeholder="Confirm Password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)} // 비밀번호 확인 입력 값 업데이트
-        />
-        <SignupButton onClick={handleSignup}>회원가입</SignupButton>
+        <Title>회원가입</Title>
+        <InputForm>
+          <ChickImage src={ChickImg} alt="Chick" />
+          <Input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            type="text"
+            placeholder="Nickname"
+            value={nickName}
+            onChange={(e) => setNickName(e.target.value)}
+          />
+          <Input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Input
+            type="password"
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          <SignupButton onClick={handleSignup}>회원가입</SignupButton>
+        </InputForm>
       </SignupForm>
     </SignupContainer>
   );
@@ -72,29 +72,38 @@ const SignupContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   background-color: #f7f4f0;
   padding: 0;
   margin: 0;
 `;
 
 const Title = styled.h1`
-  font-size: 6rem;
+  font-size: 5rem;
   color: #d4886e;
   margin-bottom: 30px;
 `;
 
 const SignupForm = styled.div`
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   background-color: #fff6e6;
   padding: 50px;
   border-radius: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 500px;
+`;
+
+const InputForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
 `;
 
 const ChickImage = styled.img`
@@ -108,6 +117,7 @@ const Input = styled.input`
   margin: 15px 0;
   border-radius: 5px;
   border: 1px solid #ddd;
+  box-sizing: border-box;
   font-size: 1.2rem;
 `;
 
