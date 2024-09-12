@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import logoImg from '../../assets/images/todo/logo.png';
+import logoImg from '../../assets/images/logo.png';
 
 const Container = styled.div`
   display: flex;

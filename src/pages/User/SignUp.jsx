@@ -1,32 +1,38 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../../api/auth';
 import styled from 'styled-components';
 import ChickImg from '../../assets/images/mainPage/mainChick.png';
+import { signup } from '../../api/auth';
 
-const Login = () => {
+const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [nickName, setNickName] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const handleSignup = async () => {
+
+    if (password !== confirmPassword) {
+        alert('비밀번호가 일치하지 않습니다.');
+        return;
+    }
+
     try {
-      const res = await login(email, password);
-      console.log('Login successful:', res);
-      navigate('/main');
+      // 회원가입 API 호출
+      const res = await signup(nickName, email, password, confirmPassword);
+      console.log('Signup successful:', res);
+
+      // 회원가입 성공 시 로그인 페이지로 이동
+      navigate('/login');
     } catch (err) {
-      console.error('Login failed:', err);
+      console.error('Signup failed:', err);
     }
   };
 
-  const handleSignup = () => {
-    navigate('/signup');
-  };
-
   return (
-    <LoginContainer>
-      <LoginForm>
-        <Title>ToDorian</Title>
+    <SignupContainer>
+      <SignupForm>
         <InputForm>
           <ChickImage src={ChickImg} alt="Chick" />
           <Input
@@ -36,22 +42,33 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
           <Input
+            type="text"
+            placeholder="Nickname"
+            value={nickName}
+            onChange={(e) => setNickName(e.target.value)}
+          />
+          <Input
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <LoginButton onClick={handleLogin}>로그인</LoginButton>
-          <SignupText onClick={handleSignup}>회원가입</SignupText>
+          <Input
+            type="password"
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          <SignupButton onClick={handleSignup}>회원가입</SignupButton>
         </InputForm>
-      </LoginForm>
-    </LoginContainer>
+      </SignupForm>
+    </SignupContainer>
   );
 };
 
-export default Login;
+export default SignUp;
 
-const LoginContainer = styled.div`
+const SignupContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -63,13 +80,7 @@ const LoginContainer = styled.div`
   margin: 0;
 `;
 
-const Title = styled.h1`
-  font-size: 5rem;
-  color: #d4886e;
-  margin-bottom: 30px;
-`;
-
-const LoginForm = styled.div`
+const SignupForm = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
@@ -105,7 +116,7 @@ const Input = styled.input`
   font-size: 1.2rem;
 `;
 
-const LoginButton = styled.button`
+const SignupButton = styled.button`
   width: 100%;
   padding: 15px;
   background-color: #ffd233;
@@ -118,17 +129,5 @@ const LoginButton = styled.button`
 
   &:hover {
     background-color: #fbc02d;
-  }
-`;
-
-const SignupText = styled.div`
-  margin-top: 15px; /* 입력창과 동일한 간격 */
-  font-size: 0.9rem; /* 글자 크기를 작게 */
-  color: black;
-  cursor: pointer;
-  align-self: flex-end; /* 오른쪽 끝으로 정렬 */
-
-  &:hover {
-    text-decoration: underline;
   }
 `;
