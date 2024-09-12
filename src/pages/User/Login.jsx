@@ -5,45 +5,45 @@ import styled from 'styled-components';
 import ChickImg from '../../assets/images/mainPage/mainChick.png';
 
 const Login = () => {
-  // useState 훅을 사용해 이메일과 비밀번호 상태 관리
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-
     try {
-      // login 함수 호출하여 이메일과 비밀번호 전송
       const res = await login(email, password);
       console.log('Login successful:', res);
-
-      // 로그인 성공 시 메인 페이지로 이동
       navigate('/');
     } catch (err) {
       console.error('Login failed:', err);
     }
   };
 
+  const handleSignup = () => {
+    navigate('/signup');
+  };
+
   return (
     <LoginContainer>
       <LoginForm>
-      <Title>ToDorian</Title>
-      <InputForm>
-        <ChickImage src={ChickImg} alt="Chick" />
-        <Input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)} // 이메일 입력 값 업데이트
-        />
-        <Input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)} // 비밀번호 입력 값 업데이트
-        />
-        <LoginButton onClick={handleLogin}>로그인</LoginButton>
-      </InputForm>
+        <Title>ToDorian</Title>
+        <InputForm>
+          <ChickImage src={ChickImg} alt="Chick" />
+          <Input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <LoginButton onClick={handleLogin}>로그인</LoginButton>
+          <SignupText onClick={handleSignup}>회원가입</SignupText>
+        </InputForm>
       </LoginForm>
     </LoginContainer>
   );
@@ -59,12 +59,12 @@ const LoginContainer = styled.div`
   height: 100%;
   width: 100%;
   background-color: #f7f4f0;
-  padding: 0; 
-  margin: 0; 
+  padding: 0;
+  margin: 0;
 `;
 
 const Title = styled.h1`
-  font-size: 5rem;  /* 제목을 더 크게 조정 */
+  font-size: 5rem;
   color: #d4886e;
   margin-bottom: 30px;
 `;
@@ -75,7 +75,7 @@ const LoginForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* 부모 요소에서 자식들을 가운데 정렬 */
+  justify-content: center;
   background-color: #fff6e6;
   padding: 50px;
   border-radius: 10px;
@@ -85,13 +85,13 @@ const LoginForm = styled.div`
 const InputForm = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center; /* 수평 가운데 정렬 */
-  justify-content: center; /* 수직 가운데 정렬 */
+  align-items: center;
+  justify-content: center;
   width: 30%;
 `;
 
 const ChickImage = styled.img`
-  width: 250px; /* 이미지를 더 크게 조정 */
+  width: 250px;
   margin-bottom: 30px;
 `;
 
@@ -102,21 +102,33 @@ const Input = styled.input`
   border-radius: 5px;
   border: 1px solid #ddd;
   box-sizing: border-box;
-  font-size: 1.2rem; /* 폰트 크기를 조금 더 키움 */
+  font-size: 1.2rem;
 `;
 
 const LoginButton = styled.button`
   width: 100%;
   padding: 15px;
   background-color: #ffd233;
-  color: white;
+  color: black;
   border: none;
   border-radius: 5px;
-  font-size: 1.5rem; /* 버튼 텍스트를 더 크게 조정 */
+  font-size: 1.5rem;
   cursor: pointer;
   transition: background-color 0.3s;
 
   &:hover {
     background-color: #fbc02d;
+  }
+`;
+
+const SignupText = styled.div`
+  margin-top: 15px; /* 입력창과 동일한 간격 */
+  font-size: 0.9rem; /* 글자 크기를 작게 */
+  color: black;
+  cursor: pointer;
+  align-self: flex-end; /* 오른쪽 끝으로 정렬 */
+
+  &:hover {
+    text-decoration: underline;
   }
 `;

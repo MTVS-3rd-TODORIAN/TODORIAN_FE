@@ -33,7 +33,6 @@ const SignUp = () => {
   return (
     <SignupContainer>
       <SignupForm>
-        <Title>회원가입</Title>
         <InputForm>
           <ChickImage src={ChickImg} alt="Chick" />
           <Input
@@ -81,12 +80,6 @@ const SignupContainer = styled.div`
   margin: 0;
 `;
 
-const Title = styled.h1`
-  font-size: 5rem;
-  color: #d4886e;
-  margin-bottom: 30px;
-`;
-
 const SignupForm = styled.div`
   height: 100%;
   width: 100%;
@@ -127,7 +120,7 @@ const SignupButton = styled.button`
   width: 100%;
   padding: 15px;
   background-color: #ffd233;
-  color: white;
+  color: black;
   border: none;
   border-radius: 5px;
   font-size: 1.5rem;
