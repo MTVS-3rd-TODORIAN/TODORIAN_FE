@@ -1,4 +1,3 @@
-
 import {
   BrowserRouter,
   Routes,
@@ -16,15 +15,13 @@ import Home from './pages/Home';
 function App() {
   return (
     <Routes>
-      <>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/main" element={<Main/>}/>
-        <Route path="/signup" element={<SignUp/>}/>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/game" element={<GameBrowser/>}/>
-        <Route path="/today-deal" element={<Todo/>}/>
-        <Route path="/closet" element={<Inventory/>}/>
-      </>
+      <Route path="/" element={<Home />} />
+      <Route path="/main" element={<Main />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/game" element={<GameBrowser />} />
+      <Route path="/today-deal" element={<Todo />} />
+      <Route path="/closet" element={<Inventory />} />
     </Routes>
   );
 }
