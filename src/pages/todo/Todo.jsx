@@ -1,43 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
-import logoImg from '../../assets/images/logo.png';
+import Sidebar from '../../components/Sidebar';
 
 const Container = styled.div`
   display: flex;
   background-color: #f8f4ef;
   height: 100vh;
   width: 100vw;
-`;
-
-const Sidebar = styled.div`
-  background-color: #d0e6f6;
-  width: 250px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Logo = styled.img`
-  width: 140px;
-  height: 80px;
-  margin-bottom: 20px;
-`;
-
-const SidebarButton = styled.button`
-  background: none;
-  border: none;
-  width: 100%;
-  padding: 15px 0;
-  margin: 10px 0;
-  border-radius: 20px;
-  font-size: 18px;
-  cursor: pointer;
-  font-weight: bold;
-  color: #333;
-  &:hover {
-    background-color: #c4d7f2;
-  }
 `;
 
 const ChecklistContainer = styled.div`
@@ -110,15 +79,7 @@ function Todo() {
 
   return (
     <Container>
-      <Sidebar>
-        <Logo src={logoImg} alt="Logo" />
-        <SidebarButton>MAIN</SidebarButton>
-        <SidebarButton>STORE</SidebarButton>
-        <SidebarButton>TO DO</SidebarButton>
-        <SidebarButton>FARM</SidebarButton>
-        <SidebarButton>MY PAGE</SidebarButton>
-      </Sidebar>
-
+      <Sidebar/>
       <ChecklistContainer>
         <Header>
           <DateButton>&lt;</DateButton>
