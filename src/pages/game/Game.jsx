@@ -1,51 +1,34 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
+import Sidebar from '../../components/Sidebar';
 
-import LadderImg from '../assets/images/gamePage/ladder.png';
-import SoccerBallImg from '../assets/images/gamePage/soccerBall.png'; 
-import BaseBallImg from '../assets/images/gamePage/baseBall.png';
-import ChickImg from '../assets/images/mainPage/mainChick.png';
+import LadderImg from '../../assets/images/gamePage/ladder.png';
+import SoccerBallImg from '../../assets/images/gamePage/soccerBall.png';
+import BaseBallImg from '../../assets/images/gamePage/baseBall.png';
+import ChickImg from '../../assets/images/mainPage/mainChick.png';
 
-const MainContainer = styled.div`
+const Container = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
-  background-color: #f7f4f0;
-  padding: 20px;
-  margin: 0;
-  overflow-x: hidden;
+  background-color: #f8f4ef;
+  height: 100vh;
   width: 100vw;
 `;
 
-const Title = styled.h1`
-  font-size: 3rem;
-  color: #d4886e;
-  margin-bottom: 20px;
-  text-align: center;
-`;
-
 const ContentContainer = styled.div`
+  flex: 1;
+  padding: 40px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  width: 100%;
-  max-width: 1200px;
+  overflow-y: auto;
   gap: 20px;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: center;
-  }
 `;
 
 const GameGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
-  width: 100%;
-  max-width: 800px;
+  width: 70%;
 `;
 
 const GameItem = styled.div`
@@ -63,9 +46,9 @@ const GameItem = styled.div`
   }
 `;
 
-const GameImage = styled.img`
-  width: 100%;
-  height: 150px;
+const ImageStyle = styled.img`
+  width: 200px;  
+  height: 200px; 
   object-fit: cover;
   border-radius: 5px;
   margin-bottom: 10px;
@@ -84,11 +67,7 @@ const ChickContainer = styled.div`
   justify-content: center;
   position: sticky;
   top: 20px;
-`;
-
-const ChickImage = styled.img`
-  width: 200px;
-  margin-bottom: 20px;
+  width: 30%;
 `;
 
 const SpeechBubble = styled.div`
@@ -113,12 +92,11 @@ const SpeechBubble = styled.div`
   }
 `;
 
-// 사다리 게임
 const games = [
   {
     id: 1,
     title: "사다리 게임",
-    image: LadderImg, // 수정된 부분
+    image: LadderImg,
   },
   {
     id: 2,
@@ -136,19 +114,19 @@ export default function GameBrowser() {
   const [selectedGame, setSelectedGame] = useState(null);
 
   return (
-    <MainContainer>
-      <Title>게임</Title>
+    <Container>
+      <Sidebar />
       <ContentContainer>
         <GameGrid>
           {games.map((game) => (
             <GameItem key={game.id} onClick={() => setSelectedGame(game)}>
-              <GameImage src={game.image} alt={game.title} />
+              <ImageStyle src={game.image} alt={game.title} />
               <GameTitle>{game.title}</GameTitle>
             </GameItem>
           ))}
         </GameGrid>
         <ChickContainer>
-          <ChickImage src={ChickImg} alt="Chick" /> {/* ChickImg로 변경 */}
+          <ImageStyle src={ChickImg} alt="Chick" /> 
           <SpeechBubble>
             {selectedGame
               ? `${selectedGame.title}을(를) 선택하셨네요! 좋은 선택이에요!`
@@ -156,6 +134,6 @@ export default function GameBrowser() {
           </SpeechBubble>
         </ChickContainer>
       </ContentContainer>
-    </MainContainer>
+    </Container>
   );
 }

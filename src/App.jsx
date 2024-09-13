@@ -6,7 +6,7 @@ import {
 import SignUp from './pages/User/SignUp';
 import Login from './pages/User/Login';
 import Main from './pages/Main';
-import GameBrowser from './pages/Game';
+import GameBrowser from './pages/game/Game';
 import Todo from './pages/todo/Todo';
 import Inventory from './pages/inventory/Inventory';
 import Home from './pages/Home';
