@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { logout } from '../api/auth';
+import { getMemberProfile } from '../api/member';
 import styled from 'styled-components';
+
 import logoImg from '../assets/images/common/logo.png'; 
 import profileImg from '../assets/images/common/profile.png'; 
 
@@ -53,14 +56,26 @@ const ProfileSection = styled.div`
   text-align: center; 
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
 
 const ProfileImage = styled.img`
   width: 60px;
   height: 60px;
   cursor: pointer;
+  margin-right: 10px;
   &:hover {
     background-color: #c4d7f2;
+  }
+`;
+
+const Nickname = styled.div`
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  &:hover {
+    color: #666;
   }
 `;
 
@@ -77,41 +92,53 @@ const DropdownMenu = styled.div`
 `;
 
 const DropdownButton = styled(SidebarButton)`
-  width: 200px; /* 드롭다운 버튼 넓이 설정 */
+  width: 200px;
   margin: 5px 0;
 `;
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
+  const [nickname, setNickname] = useState(''); // 닉네임 상태 추가
   const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
     setShowDropdown((prev) => !prev);
   };
 
-  const handleLogout = () => {
-    
-    localStorage.removeItem('token');
-    localStorage.removeItem('refresh');
-
-    console.log('Logout');
-    navigate('/');
+  const handleLogout = async () => {
+    try {
+      const res = await logout();
+      console.log('Logout successful:', res);
+      navigate('/');
+    } catch (err) {
+      console.error('Logout failed:', err);
+    }
   };
 
-  // 전역 클릭 이벤트 핸들러
+  // 닉네임을 받아오는 API 호출
+  const getProfile = async () => {
+    try {
+      const response = await getMemberProfile();
+      setNickname(response.data.nickname); // 받아온 닉네임을 상태에 저장
+    } catch (err) {
+      console.error('Failed to fetch profile:', err);
+    }
+  };
+
+  useEffect(() => {
+    getProfile(); // 컴포넌트 마운트 시 프로필 정보 불러오기
+  }, []);
+
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // 클릭된 영역이 드롭다운 메뉴 바깥이라면 닫기
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setShowDropdown(false);
       }
     };
 
-    // 이벤트 리스너 추가
     document.addEventListener('mousedown', handleClickOutside);
 
-    // 컴포넌트 언마운트 시 이벤트 리스너 제거
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
@@ -127,9 +154,10 @@ const Sidebar = () => {
         <SidebarButton onClick={() => navigate('/store')}>상점 방문</SidebarButton>
         <SidebarButton onClick={() => navigate('/game')}>게임 하러 가기</SidebarButton>
       </LogoContainer>
-      
+
       <ProfileSection ref={dropdownRef}>
         <ProfileImage src={profileImg} alt="Profile" onClick={toggleDropdown} />
+        <Nickname onClick={toggleDropdown}>{nickname || '닉네임 로딩 중...'}</Nickname> {/* 닉네임 출력 */}
         <DropdownMenu show={showDropdown}>
           <DropdownButton onClick={() => navigate('/mypage')}>마이 페이지</DropdownButton>
           <DropdownButton onClick={() => navigate('/feed')}>밥 주러 가기</DropdownButton>
