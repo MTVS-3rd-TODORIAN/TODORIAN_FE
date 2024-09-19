@@ -120,7 +120,11 @@ const Sidebar = () => {
   const getProfile = async () => {
     try {
       const response = await getMemberProfile();
-      setNickname(response.data.nickname); // 받아온 닉네임을 상태에 저장
+      if (response?.success && response?.response?.nickName) {
+        setNickname(response.response.nickName); // 받아온 닉네임을 상태에 저장
+      } else {
+        console.error('Invalid profile response:', response);
+      }
     } catch (err) {
       console.error('Failed to fetch profile:', err);
     }
