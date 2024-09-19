@@ -91,9 +91,12 @@ const Sidebar = () => {
   };
 
   const handleLogout = () => {
-    // 로그아웃 로직
+    
+    localStorage.removeItem('token');
+    localStorage.removeItem('refresh');
+
     console.log('Logout');
-    navigate('/login'); // 로그아웃 후 로그인 페이지로 이동
+    navigate('/');
   };
 
   // 전역 클릭 이벤트 핸들러
