@@ -1,5 +1,5 @@
 import Modal from 'react-modal';
-import PropTypes from 'prop-types'; // PropTypes 임포트
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const ErrorModal = ({ isOpen, onClose, message }) => {
