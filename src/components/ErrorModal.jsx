@@ -21,13 +21,16 @@ const ErrorModal = ({ isOpen, onClose, message }) => {
           borderRadius: '10px',
           boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
           backgroundColor: '#fff6e6',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center', // 컴포넌트들을 수직 중앙 정렬
+          justifyContent: 'center', // 컴포넌트들을 수평 중앙 정렬
         },
         overlay: {
           backgroundColor: 'rgba(0, 0, 0, 0.5)',
         },
       }}
     >
-      <ModalTitle>오류 발생</ModalTitle>
       <ModalMessage>{message}</ModalMessage>
       <ModalButton onClick={onClose}>닫기</ModalButton>
     </Modal>
@@ -43,15 +46,11 @@ ErrorModal.propTypes = {
 
 export default ErrorModal;
 
-const ModalTitle = styled.h2`
-  color: #d32f2f;
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-`;
-
 const ModalMessage = styled.p`
   font-size: 1rem;
   margin-bottom: 20px;
+  text-align: center;
+  color: #000000;
 `;
 
 const ModalButton = styled.button`
