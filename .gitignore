@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 
 .env
+
+# Added By KimChaeHo
+package-lock.json
+package.json
