@@ -20,7 +20,7 @@ const Farm = () => {
     return (
         <div className="relative w-screen h-screen max-w-[1920px] max-h-[1080px] bg-[#fff] mx-auto overflow-hidden">
             <Sidebar /> {/* 사이드바 컴포넌트 */}
-            <div className="absolute left-[250px] top-0 w-full h-full bg-[#8edb98] rounded-2xl overflow-hidden">
+            <div className="absolute left-[250px] top-0 w-[calc(100%-250px)] h-full bg-[#8edb98] rounded-2xl overflow-hidden">
                 {/* 배경 이미지 표시 */}
                 <img
                     className="absolute left-[50%] top-[50%] transform -translate-x-1/2 -translate-y-1/2 w-full h-full object-cover"
@@ -29,14 +29,14 @@ const Farm = () => {
                 />
 
                 {/* 배경 선택 버튼들 */}
-                <div className="absolute bottom-4 right-4 flex space-x-4 z-10">
+                <div className="absolute bottom-4 right-4 flex space-x-4 z-20"> {/* z-index 조정 */}
                     <button onClick={() => handleBackgroundChange('farm1')} className="w-24 h-24 bg-blue-200 rounded">배경 1</button>
                     <button onClick={() => handleBackgroundChange('farm2')} className="w-24 h-24 bg-green-200 rounded">배경 2</button>
                     <button onClick={() => handleBackgroundChange('farm3')} className="w-24 h-24 bg-red-200 rounded">배경 3</button>
                 </div>
 
                 {/* 방명록 남기기 버튼 */}
-                <button onClick={handleGuestbookNavigation} className="absolute top-5 right-5 p-2 bg-blue-500 text-white rounded-lg z-10">
+                <button onClick={handleGuestbookNavigation} className="absolute top-5 right-5 p-4 bg-blue-500 text-white rounded-lg z-20">
                     방명록 남기기
                 </button>
             </div>
@@ -48,7 +48,7 @@ Farm.propTypes = {
     방명록_남기기: PropTypes.func.isRequired,
     배경1: PropTypes.func.isRequired,
     배경2: PropTypes.func.isRequired,
-    배경3: PropTypes.func.isRequired
+    배경3: PropTypes.func.isRequired,
 };
 
 export default Farm;
