@@ -13,6 +13,8 @@ import Home from './pages/Home';
 import Farm from './pages/farm/Farm';
 // import Guestbook from './pages/guestbook/Guestbook';
 
+import LadderGame from './pages/game/LadderGame';
+// Import other components for routing here...
 
 function App() {
   return (
@@ -26,6 +28,7 @@ function App() {
       <Route path="/closet" element={<Inventory />} />
       <Route path="/farm" element={<Farm />} />
       {/* <Route path="/guestbook" element={<Guestbook />} /> */}
+      <Route path="/game/ladder" element={<LadderGame/>} />
     </Routes>
   );
 }
