@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // 추가
 import styled from 'styled-components';
 import Sidebar from '../../components/Sidebar';
 
@@ -92,43 +93,57 @@ const SpeechBubble = styled.div`
   }
 `;
 
-const games = [
+const games = [ // 게임 목록 배열
   {
     id: 1,
-    title: "사다리 게임",
-    image: LadderImg,
+    title: "사다리 게임", // 게임 제목
+    image: LadderImg, // 게임 이미지
+    path: "/game/ladder", // 각 게임의 경로
   },
   {
     id: 2,
     title: "야구 게임",
     image: BaseBallImg,
+    path: "/game/baseball", // 각 게임의 경로
   },
   {
     id: 3,
     title: "축구 게임",
     image: SoccerBallImg,
+    path: "/game/soccer", // 각 게임의 경로
   }
 ];
 
-export default function GameBrowser() {
-  const [selectedGame, setSelectedGame] = useState(null);
+export default function GameBrowser() { // GameBrowser 컴포넌트 정의
+  const [selectedGame, setSelectedGame] = useState(null); // 선택된 게임 상태 변수
+  const navigate = useNavigate(); // navigate 훅 사용
 
-  return (
+  const handleGameSelect = (game) => { // 게임 선택 처리 함수
+    setSelectedGame(game); // 선택된 게임 상태 업데이트
+    navigate(game.path); // 게임 선택 시 해당 경로로 이동
+  };
+
+  return ( // 컴포넌트 반환
     <Container>
-      <Sidebar />
+      <Sidebar /> {/*사이드바 컴포넌트 렌더링*/}
       <ContentContainer>
         <GameGrid>
-          {games.map((game) => (
-            <GameItem key={game.id} onClick={() => setSelectedGame(game)}>
+          {games.map((game) => ( // 게임 목록을 맵핑하여 렌더링
+          // 게임 아이템 클릭 시 선택 처리
+            <GameItem key={game.id} onClick={() => handleGameSelect(game)}> 
+              {/* 게임 이미지 렌더링 */}
               <ImageStyle src={game.image} alt={game.title} />
+              {/* 게임 제목 렌더링 */}
               <GameTitle>{game.title}</GameTitle>
             </GameItem>
           ))}
         </GameGrid>
         <ChickContainer>
-          <ImageStyle src={ChickImg} alt="Chick" /> 
+          {/*병아리 이미지 렌더링*/}
+          <ImageStyle src={ChickImg} alt="Chick" />
           <SpeechBubble>
-            {selectedGame
+
+            {selectedGame // 선택된 게임에 따라 말풍선 내용 변경
               ? `${selectedGame.title}을(를) 선택하셨네요! 좋은 선택이에요!`
               : "어떤 게임을 해볼까요? 게임을 선택해주세요!"}
           </SpeechBubble>
