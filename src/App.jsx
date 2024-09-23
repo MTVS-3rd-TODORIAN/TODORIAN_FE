@@ -10,7 +10,9 @@ import GameBrowser from './pages/game/Game';
 import Todo from './pages/todo/Todo';
 import Inventory from './pages/inventory/Inventory';
 import Home from './pages/Home';
-// Import other components for routing here...
+import Farm from './pages/farm/Farm';
+// import Guestbook from './pages/guestbook/Guestbook';
+
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
       <Route path="/game" element={<GameBrowser />} />
       <Route path="/today-deal" element={<Todo />} />
       <Route path="/closet" element={<Inventory />} />
+      <Route path="/farm" element={<Farm />} />
+      {/* <Route path="/guestbook" element={<Guestbook />} /> */}
     </Routes>
   );
 }
