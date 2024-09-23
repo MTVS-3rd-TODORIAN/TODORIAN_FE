@@ -39,9 +39,9 @@ export default function LadderGame() {
       setSelectedLadder(ladder)
       if (ladder === winningLadder) {
         const reward = calculateReward(bet)
-        setResult(`축하합니다! ${reward} 코인을 획득하셨습니다!`)
+        setResult(`둘 중에 뭐를 고를까 하다가 딱 골랐는뎅 ${reward} 코인도 얻고 완전 럭키비키잖앙😊🍀`)
       } else {
-        setResult(`아쉽습니다. ${bet} 코인을 잃으셨습니다.`)
+        setResult(`${bet} 코인을 잃다니 완전 언럭키비키잖앙😭😿`)
       }
       setGameStarted(false)
     }
@@ -61,7 +61,7 @@ export default function LadderGame() {
       <div className="flex-grow p-4">
         <Card className="w-full max-w-md mx-auto">
           <CardHeader>
-            <CardTitle className="text-2xl font-bold text-center">사다리 게임</CardTitle>
+            <CardTitle className="text-2xl font-bold text-center">🍀럭키비키💚 게임</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
