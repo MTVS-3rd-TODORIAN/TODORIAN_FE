@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom'; // 추가
 import styled from 'styled-components';
 import Sidebar from '../../components/Sidebar';
 
-import LadderImg from '../../assets/images/gamePage/ladder.png';
-import SoccerBallImg from '../../assets/images/gamePage/soccerBall.png';
-import BaseBallImg from '../../assets/images/gamePage/baseBall.png';
+import LadderImg from '../../assets/images/gamePage/image.png';
+import SoccerBallImg from '../../assets/images/gamePage/image2.png';
+import BaseBallImg from '../../assets/images/gamePage/image1.png';
 import ChickImg from '../../assets/images/mainPage/mainChick.png';
 
 const Container = styled.div`
@@ -96,7 +96,7 @@ const SpeechBubble = styled.div`
 const games = [ // 게임 목록 배열
   {
     id: 1,
-    title: "사다리 게임", // 게임 제목
+    title: "🍀럭키비키💚 게임", // 게임 제목
     image: LadderImg, // 게임 이미지
     path: "/game/ladder", // 각 게임의 경로
   },
