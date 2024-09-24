@@ -102,13 +102,13 @@ const games = [ // 게임 목록 배열
   },
   {
     id: 2,
-    title: "야구 게임",
+    title: "야구 게임(준비 중)",
     image: BaseBallImg,
     path: "/game/baseball", // 각 게임의 경로
   },
   {
     id: 3,
-    title: "축구 게임",
+    title: "축구 게임(준비 중)",
     image: SoccerBallImg,
     path: "/game/soccer", // 각 게임의 경로
   }
