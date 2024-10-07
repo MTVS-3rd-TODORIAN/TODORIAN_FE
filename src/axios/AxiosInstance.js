@@ -1,10 +1,13 @@
 import axios from 'axios';
-import { getRefresh } from '../api/oauth';
+import { getRefresh } from '../api/auth';
 
 const axiosInstance = axios.create({ baseURL: import.meta.env.VITE_BASE_URL });
 
 axiosInstance.interceptors.request.use(
   async (config) => {
+
+    console.log("토큰 확인");
+
     const accessToken = localStorage.getItem('token');
 
     if (!accessToken) {

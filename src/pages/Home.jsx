@@ -46,8 +46,7 @@ const LogoContainer = styled.div`
 `;
 
 const LogoImage = styled.img`
-  width: 50%; /* 로고 이미지를 크게 조정 */
-  max-width: 500px;
+  width: 90%; /* 로고 이미지를 크게 조정 */
   padding-left: 300px;
 `;
 

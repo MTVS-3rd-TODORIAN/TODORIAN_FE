@@ -3,10 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { login } from '../../api/auth';
 import styled from 'styled-components';
 import ChickImg from '../../assets/images/mainPage/mainChick.png';
+import ErrorModal from '../../components/ErrorModal';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async () => {
@@ -16,11 +19,19 @@ const Login = () => {
       navigate('/main');
     } catch (err) {
       console.error('Login failed:', err);
+      if (err?.response?.status === 400) {
+        setErrorMessage(err.response.data.error.message);
+        setIsModalOpen(true);
+      }
     }
   };
 
   const handleSignup = () => {
     navigate('/signup');
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -45,6 +56,8 @@ const Login = () => {
           <SignupText onClick={handleSignup}>회원가입</SignupText>
         </InputForm>
       </LoginForm>
+
+      <ErrorModal isOpen={isModalOpen} onClose={closeModal} message={errorMessage} />
     </LoginContainer>
   );
 };
@@ -122,11 +135,11 @@ const LoginButton = styled.button`
 `;
 
 const SignupText = styled.div`
-  margin-top: 15px; /* 입력창과 동일한 간격 */
-  font-size: 0.9rem; /* 글자 크기를 작게 */
+  margin-top: 15px;
+  font-size: 0.9rem;
   color: black;
   cursor: pointer;
-  align-self: flex-end; /* 오른쪽 끝으로 정렬 */
+  align-self: flex-end;
 
   &:hover {
     text-decoration: underline;

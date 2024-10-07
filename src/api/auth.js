@@ -33,7 +33,7 @@ export const signup = async (nickName, email, password, confirmPassword) => {
   const res = await axios.post(`${baseURL}/auth/signup`, signUpDTO);
 
   return res.data;
-}
+};
 
 export const login = async (email, password) => {
 
@@ -45,10 +45,15 @@ export const login = async (email, password) => {
     password: password
   };
 
-  const res = await axios.post(`${baseURL}/auth/login`, authDTO); // authDTO 객체를 본문으로 전달
+  const res = await axios.post(`${baseURL}/auth/login`, authDTO);
 
-  const token = res.headers['Authorization'];
-  const refresh = res.headers['Refresh-Token'];
+  // 헤더에서 토큰 정보 추출
+  const token = res.headers['Authorization'] || res.headers['authorization'];
+  const refresh = res.headers['Refresh-Token'] || res.headers['refresh-token'];
+
+  console.log(res.headers);
+  console.log('token: ' + token);
+  console.log('refresh: ' + refresh);
 
   storeTokens(token, refresh);
 

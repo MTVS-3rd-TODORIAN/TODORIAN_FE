@@ -1,21 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import logoImg from '../../assets/images/logo.png';
+import Sidebar from '../../components/Sidebar';
 
 const Container = styled.div`
   display: flex;
   background-color: #f8f4ef;
   height: 100vh;
   width: 100vw;
-`;
-
-const Sidebar = styled.div`
-  background-color: #d0e6f6;
-  width: 250px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 `;
 
 const Logo = styled.img`
@@ -150,15 +142,7 @@ function Inventory(){
 
     return (
         <Container>
-            <Sidebar>
-                <Logo src={logoImg} alt="Logo" />
-                <SidebarButton>MAIN</SidebarButton>
-                <SidebarButton>STORE</SidebarButton>
-                <SidebarButton>TO DO</SidebarButton>
-                <SidebarButton>FARM</SidebarButton>
-                <SidebarButton>MY PAGE</SidebarButton>
-            </Sidebar>
-    
+            <Sidebar/>
             <ContentArea>
                 <Header>
                     <InventoryTitle>Inventory</InventoryTitle>
