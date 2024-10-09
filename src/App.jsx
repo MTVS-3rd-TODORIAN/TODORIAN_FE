@@ -11,6 +11,7 @@ import Todo from './pages/todo/Todo';
 import Inventory from './pages/inventory/Inventory';
 import Home from './pages/Home';
 import Farm from './pages/farm/Farm';
+import Friend from './pages/friend/Friend';
 // import Guestbook from './pages/guestbook/Guestbook';
 
 import LadderGame from './pages/game/LadderGame';
@@ -28,7 +29,8 @@ function App() {
       <Route path="/closet" element={<Inventory />} />
       <Route path="/farm" element={<Farm />} />
       {/* <Route path="/guestbook" element={<Guestbook />} /> */}
-      <Route path="/game/ladder" element={<LadderGame/>} />
+      <Route path="/game/ladder" element={<LadderGame />} />
+      <Route path="/friends" element={<Friend />} />
     </Routes>
   );
 }
