@@ -1,11 +1,12 @@
 'use client'
 
-import { useState } from 'react'
-import { Button } from "../../components/ui/button"
-import { Input } from "../../components/ui/input"
-import { Label } from "../../components/ui/label"
-import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card"
-import Sidebar from "../../components/Sidebar"
+import { useState, useEffect } from 'react';
+import { Button } from "../../components/ui/button";
+import { Input } from "../../components/ui/input";
+import { Label } from "../../components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
+import Sidebar from "../../components/Sidebar";
+import { getTotalCoinAmountOfMember } from "../../api/coin";
 
 export default function LadderGame() {
   const defaultBetSize = 0;
@@ -16,6 +17,23 @@ export default function LadderGame() {
   const [gameStarted, setGameStarted] = useState(false);
   const [selectedLadder, setSelectedLadder] = useState(null);
   const [winningLadder, setWinningLadder] = useState(null);
+  const [totalCoins, setTotalCoins] = useState(0); // 총 코인 수량 상태 추가
+  const [loadingCoins, setLoadingCoins] = useState(true); // 로딩 상태 추가
+
+  // 컴포넌트 마운트 시 총 코인 수량 가져오기
+  useEffect(() => {
+    const fetchTotalCoins = async () => {
+      try {
+        const coins = await getTotalCoinAmountOfMember();
+        setTotalCoins(coins); // 총 코인 수량 상태 업데이트
+      } catch (error) {
+        console.error('Failed to fetch total coin amount:', error);
+      } finally {
+        setLoadingCoins(false); // 로딩 완료
+      }
+    };
+    fetchTotalCoins();
+  }, []);
 
   const startGame = () => {
     if (bet < 1) {
@@ -91,6 +109,16 @@ export default function LadderGame() {
     )
   );
 
+  const renderTotalCoins = () => (
+    <div className="text-center font-bold mt-4">
+      {loadingCoins ? (
+        <p>로딩 중...</p>
+      ) : (
+        <p>현재 총 코인: {totalCoins} 코인</p>
+      )}
+    </div>
+  );
+
   return (
     <div className="flex">
       <Sidebar />
@@ -101,6 +129,7 @@ export default function LadderGame() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
+              {renderTotalCoins()} {/* 총 코인 수량 표시 */}
               {renderBetInput()}
               <Button 
                 onClick={startGame} 
@@ -116,5 +145,5 @@ export default function LadderGame() {
         </Card>
       </div>
     </div>
-  )
+  );
 }
