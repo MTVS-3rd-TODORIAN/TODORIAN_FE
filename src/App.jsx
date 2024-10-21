@@ -12,8 +12,11 @@ import Inventory from './pages/inventory/Inventory';
 import Home from './pages/Home';
 import Farm from './pages/farm/Farm';
 import Friend from './pages/friend/Friend';
-// import Guestbook from './pages/guestbook/Guestbook';
+import MyPage from './pages/mypage/MyPage';
+import Coins from './pages/mypage/Coins';
+import Account from './pages/mypage/Account';
 
+// import Guestbook from './pages/guestbook/Guestbook';
 import LadderGame from './pages/game/LadderGame';
 // Import other components for routing here...
 
@@ -31,6 +34,9 @@ function App() {
       {/* <Route path="/guestbook" element={<Guestbook />} /> */}
       <Route path="/game/ladder" element={<LadderGame />} />
       <Route path="/friends" element={<Friend />} />
+      <Route path="/my-page" element={<MyPage />} />
+      <Route path="/coins" element={<Coins />} />
+      <Route path="/account" element={<Account />} />
     </Routes>
   );
 }
