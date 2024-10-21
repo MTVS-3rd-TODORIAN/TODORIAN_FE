@@ -88,7 +88,7 @@ const DropdownMenu = styled.div`
   border-radius: 10px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   padding: 10px;
-  display: ${(props) => (props.show ? 'block' : 'none')};
+  display: ${(props) => (props.$show ? 'block' : 'none')}; // $show로 변경
 `;
 
 const DropdownButton = styled(SidebarButton)`
@@ -162,7 +162,7 @@ const Sidebar = () => {
       <ProfileSection ref={dropdownRef}>
         <ProfileImage src={profileImg} alt="Profile" onClick={toggleDropdown} />
         <Nickname onClick={toggleDropdown}>{nickname || '닉네임 로딩 중...'}</Nickname> {/* 닉네임 출력 */}
-        <DropdownMenu show={showDropdown}>
+        <DropdownMenu $show={showDropdown}>
           <DropdownButton onClick={() => navigate('/mypage')}>마이 페이지</DropdownButton>
           <DropdownButton onClick={() => navigate('/feed')}>밥 주러 가기</DropdownButton>
           <DropdownButton onClick={() => navigate('/closet')}>옷장 가기</DropdownButton>
