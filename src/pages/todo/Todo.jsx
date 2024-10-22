@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Sidebar from '../../components/Sidebar';
+import { getTodos } from '../../api/todo';
+import axiosInstance from '../../axios/AxiosInstance';
 
 const Container = styled.div`
   display: flex;
@@ -57,24 +59,58 @@ const TodoText = styled.span`
   font-weight: ${({ checked }) => (checked ? 'bold' : 'normal')};
 `;
 
-const todosData = [
-  { id: 1, text: '건강 검진 예약하기', checked: true },
-  { id: 2, text: '영화 보기', checked: true },
-  { id: 3, text: '취미 활동하기', checked: true },
-  { id: 4, text: '블로그 글 작성하기', checked: true },
-  { id: 5, text: '사회봉사 활동하기', checked: true },
-  { id: 6, text: '가족과 시간 보내기', checked: true },
-];
-
 function Todo() {
-  const [todos, setTodos] = useState(todosData);
+  const [todos, setTodos] = useState([]); // 할 일 목록 상태
+  const [currentDate, setCurrentDate] = useState(new Date()); // 현재 날짜 상태
 
-  const handleCheckboxChange = (id) => {
-    setTodos((prevTodos) =>
-      prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, checked: !todo.checked } : todo
-      )
-    );
+  useEffect(() => {
+    const fetchTodos = async () => {
+      const year = currentDate.getFullYear();
+      const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+      const day = String(currentDate.getDate()).padStart(2, '0');
+      const formattedDate = `${year}-${month}-${day}`; // yyyy-MM-dd 형식으로 변환
+  
+      const todosData = await getTodos(formattedDate);
+      setTodos(todosData.response); // 상태 업데이트
+    };
+  
+    fetchTodos(); // 날짜가 변경될 때마다 데이터 가져오기
+  }, [currentDate]); // currentDate가 변경될 때마다 useEffect 실행
+  
+  // 날짜 변경 함수
+  const handlePrevDate = () => {
+    setCurrentDate(prevDate => {
+      const newDate = new Date(prevDate); // 새로운 Date 객체 생성
+      newDate.setDate(prevDate.getDate() - 1); // 날짜를 1일 이전으로 설정
+      return newDate;
+    });
+  };
+  
+  const handleNextDate = () => {
+    setCurrentDate(prevDate => {
+      const newDate = new Date(prevDate); // 새로운 Date 객체 생성
+      newDate.setDate(prevDate.getDate() + 1); // 날짜를 1일 이후로 설정
+      return newDate;
+    });
+  };
+
+  const handleCheckboxChange = async (id) => {
+    try {
+        // API 호출
+        const response = await axiosInstance.post(`/todo/${id}/complete`);
+        console.log(response.data); // API 응답 확인
+
+        // 성공적으로 완료되면 상태 업데이트
+        setTodos((prevTodos) =>
+            prevTodos.map((todo) =>
+                todo.todoId === id && !todo.completed
+                    ? { ...todo, completed: true }
+                    : todo
+            )
+        );
+    } catch (error) {
+        console.error('Failed to complete todo:', error);
+    }
   };
 
   return (
@@ -82,19 +118,20 @@ function Todo() {
       <Sidebar/>
       <ChecklistContainer>
         <Header>
-          <DateButton>&lt;</DateButton>
-          <h2>8/6</h2>
-          <DateButton>&gt;</DateButton>
+          <DateButton onClick={handlePrevDate}>&lt;</DateButton> {/* 전날 버튼 */}
+          <h2>{`${currentDate.getMonth() + 1}/${currentDate.getDate()}`}</h2> {/* 상태에 저장된 날짜 표시 */}
+          <DateButton onClick={handleNextDate}>&gt;</DateButton> {/* 다음 날 버튼 */}
         </Header>
 
         {todos.map((todo) => (
-          <ChecklistItem key={todo.id}>
-            <Checkbox
-              checked={todo.checked}
-              onChange={() => handleCheckboxChange(todo.id)}
-            />
-            <TodoText checked={todo.checked}>{todo.text}</TodoText>
-          </ChecklistItem>
+          <ChecklistItem key={todo.todoId}>
+              <Checkbox
+                checked={todo.completed}
+                onChange={() => handleCheckboxChange(todo.todoId)}
+                disabled={todo.completed} // 체크된 항목은 비활성화
+              />
+              <TodoText checked={todo.completed}>{todo.todoContent}</TodoText>
+            </ChecklistItem>
         ))}
       </ChecklistContainer>
     </Container>

@@ -18,6 +18,7 @@ import Account from './pages/mypage/Account';
 
 // import Guestbook from './pages/guestbook/Guestbook';
 import LadderGame from './pages/game/LadderGame';
+import Weekly from './pages/weekly/weekly';
 // Import other components for routing here...
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/game" element={<GameBrowser />} />
       <Route path="/today-deal" element={<Todo />} />
+      <Route path="/calendar" element={<Weekly />} />
       <Route path="/closet" element={<Inventory />} />
       <Route path="/farm" element={<Farm />} />
       {/* <Route path="/guestbook" element={<Guestbook />} /> */}
