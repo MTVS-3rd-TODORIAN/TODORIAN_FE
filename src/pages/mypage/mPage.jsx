@@ -10,7 +10,10 @@ import bronzeMedal from '../../assets/images/myPage/bronze.png';
 import platinumMedal from '../../assets/images/myPage/platinum.png';
 import clockIcon from '../../assets/images/myPage/Clock.png';
 import Generic from '../../assets/images/myPage/Generic-avatar.png';
-import IconProfile from '../../assets/images/myPage/Icon-profile.png'; // 프로필 아이콘 이미지
+import IconProfile from '../../assets/images/myPage/Icon-profile.png';
+import Price from '../../assets/images/myPage/Average-Price.png'; // 코인 아이콘 이미지
+import Money from '../../assets/images/myPage/Money-Bag.png'; // 머니 봉투 이미지
+import Arrow from '../../assets/images/common/icon/arrow.png'; // 뒤로 가기 이미지 추가
 
 // 유저 프로필 이미지 컴포넌트
 const UserProfileImage = ({ imageUrl, alt, size }) => (
@@ -35,6 +38,11 @@ const MPage = () => {
         navigate('/profile'); // 프로필 URL로 매핑
     };
 
+    // 메인 페이지로 이동하는 함수
+    const goToMain = () => {
+        navigate('/main'); // 메인 페이지로 이동
+    };
+
     // 버튼 클릭 시 경로 이동
     const handleNavigation = (path) => {
         navigate(path);
@@ -48,7 +56,18 @@ const MPage = () => {
             {/* 메인 컨텐츠 및 친구 목록을 2:1로 나누는 레이아웃 */}
             <div className="flex w-full">
                 {/* 메인 컨테이너 (화면의 2/3 차지) */}
-                <div className="w-2/3 p-6 flex flex-col items-center space-y-6 lg:space-y-8 overflow-y-auto bg-[#fff9ef]">
+                <div className="relative w-2/3 p-6 flex flex-col items-center space-y-6 lg:space-y-8 overflow-y-auto bg-[#fff9ef]">
+
+                    {/* 뒤로 가기 버튼 - 반응형으로 왼쪽 상단에 고정 */}
+                    <img
+                        src={Arrow}
+                        alt="뒤로 가기"
+                        className="absolute top-4 left-4 lg:top-6 lg:left-6 cursor-pointer"
+                        width="50"
+                        height="50"
+                        onClick={goToMain} // 클릭 시 메인으로 이동
+                    />
+
                     {/* 프로필 섹션 */}
                     <div className="relative flex flex-row items-center space-x-4 lg:space-x-6">
                         {/* 프로필 이미지 */}
@@ -124,14 +143,30 @@ const MPage = () => {
                     </div>
                 </div>
 
-                {/* 친구 목록 (화면의 1/3 차지) */}
+                {/* 친구 목록 및 코인 섹션 (화면의 1/3 차지) */}
                 <div className="w-1/3 bg-[#fff9ef] p-6 flex flex-col items-center space-y-4">
+                    {/* 코인 섹션 */}
+                    <div className="flex justify-center items-center space-x-6 mb-6">
+                        <div className="flex items-center space-x-2">
+                            <img src={Money} alt="머니 봉투" className="w-8 h-8" />
+                            <p className="text-xl font-bold">100</p>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <img src={Price} alt="코인" className="w-8 h-8" />
+                            <p className="text-xl font-bold">100</p>
+                        </div>
+                    </div>
+
+                    {/* 친구 목록 */}
                     <h2 className="text-xl lg:text-2xl font-bold">친구 목록</h2>
-                    <div className="space-y-4">
-                        <div className="flex items-center justify-between w-full">
+                    <div className="border border-gray-400 rounded-lg p-4 w-full space-y-4">
+                        <div className="flex items-center justify-between w-full border-b border-gray-300 pb-4">
                             <div className="flex items-center space-x-2">
                                 <UserProfileImage imageUrl={profileChick} alt="친구 이미지" size={50} />
-                                <p className="text-lg font-bold">투두리안</p>
+                                <div>
+                                    <p className="text-lg font-bold">투두리안</p>
+                                    <p className="text-gray-500">@김혜진</p>
+                                </div>
                             </div>
                             <StyledButton
                                 text="농장가기"
@@ -140,10 +175,13 @@ const MPage = () => {
                             />
                         </div>
 
-                        <div className="flex items-center justify-between w-full">
+                        <div className="flex items-center justify-between w-full border-b border-gray-300 pb-4">
                             <div className="flex items-center space-x-2">
                                 <UserProfileImage imageUrl={profileChick} alt="친구 이미지" size={50} />
-                                <p className="text-lg font-bold">차은우</p>
+                                <div>
+                                    <p className="text-lg font-bold">차은우</p>
+                                    <p className="text-gray-500">@은우</p>
+                                </div>
                             </div>
                             <StyledButton
                                 text="농장가기"
@@ -152,10 +190,13 @@ const MPage = () => {
                             />
                         </div>
 
-                        <div className="flex items-center justify-between w-full">
+                        <div className="flex items-center justify-between w-full border-b border-gray-300 pb-4">
                             <div className="flex items-center space-x-2">
                                 <UserProfileImage imageUrl={profileChick} alt="친구 이미지" size={50} />
-                                <p className="text-lg font-bold">배수지</p>
+                                <div>
+                                    <p className="text-lg font-bold">배수지</p>
+                                    <p className="text-gray-500">@수지</p>
+                                </div>
                             </div>
                             <StyledButton
                                 text="농장가기"
