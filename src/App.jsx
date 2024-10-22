@@ -18,7 +18,7 @@ import Account from './pages/mypage/Account';
 
 // import Guestbook from './pages/guestbook/Guestbook';
 import LadderGame from './pages/game/LadderGame';
-import mPage from './pages/mypage/mPage';
+import MPage from './pages/mypage/mPage';
 import Weekly from './pages/weekly/weekly';
 // Import other components for routing here...
 
@@ -37,7 +37,7 @@ function App() {
       {/* <Route path="/guestbook" element={<Guestbook />} /> */}
       <Route path="/game/ladder" element={<LadderGame />} />
       <Route path="/friends" element={<Friend />} />
-      <Route path="/mypage" element={<mPage />} />
+      <Route path="/mypage" element={<MPage />} />
       <Route path="/my-page" element={<MyPage />} />
       <Route path="/coins" element={<Coins />} />
       <Route path="/account" element={<Account />} />

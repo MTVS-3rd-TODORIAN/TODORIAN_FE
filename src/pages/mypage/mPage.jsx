@@ -23,7 +23,7 @@ const StyledButton = ({ text, bgColor, onClick }) => (
     </button>
 );
 
-const mPage = () => {
+const MPage = () => {
     const navigate = useNavigate();
 
     // 버튼 클릭 시 경로 이동
@@ -139,4 +139,4 @@ const mPage = () => {
     );
 };
 
-export default mPage;
+export default MPage;
