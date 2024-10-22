@@ -10,6 +10,7 @@ import bronzeMedal from '../../assets/images/myPage/bronze.png';
 import platinumMedal from '../../assets/images/myPage/platinum.png';
 import clockIcon from '../../assets/images/myPage/Clock.png';
 import Generic from '../../assets/images/myPage/Generic-avatar.png';
+import IconProfile from '../../assets/images/myPage/Icon-profile.png'; // 프로필 아이콘 이미지
 
 // 유저 프로필 이미지 컴포넌트
 const UserProfileImage = ({ imageUrl, alt, size }) => (
@@ -29,6 +30,11 @@ const StyledButton = ({ text, bgColor, onClick }) => (
 const MPage = () => {
     const navigate = useNavigate();
 
+    // 프로필로 이동하는 함수
+    const goToProfile = () => {
+        navigate('/profile'); // 프로필 URL로 매핑
+    };
+
     // 버튼 클릭 시 경로 이동
     const handleNavigation = (path) => {
         navigate(path);
@@ -44,21 +50,36 @@ const MPage = () => {
                 {/* 메인 컨테이너 (화면의 2/3 차지) */}
                 <div className="w-2/3 p-6 flex flex-col items-center space-y-6 lg:space-y-8 overflow-y-auto bg-[#fff9ef]">
                     {/* 프로필 섹션 */}
-                    <div className="flex flex-col items-center space-y-2 lg:space-y-4">
+                    <div className="relative flex flex-row items-center space-x-4 lg:space-x-6">
+                        {/* 프로필 이미지 */}
                         <UserProfileImage imageUrl={profileChick} alt="프로필 이미지" size={100} />
-                        <h1 className="mt-4 text-2xl lg:text-3xl font-bold">투두리안</h1>
-                        <p className="text-lg lg:text-xl text-gray-500">ToDorian</p>
 
-                        {/* 변경된 레이아웃 - 왼쪽 정렬 */}
-                        <div className="flex flex-col items-start space-y-2 mt-2">
-                            <div className="flex items-center space-x-2">
-                                <img src={clockIcon} alt="가입일" className="w-6 h-6" />
-                                <p className="text-sm lg:text-base">2024년 8월 가입</p>
+                        {/* 이름과 닉네임 */}
+                        <div className="flex flex-col items-start">
+                            <div className="relative">
+                                <h1 className="text-2xl lg:text-3xl font-bold">투두리안</h1>
+                                <p className="text-lg lg:text-xl text-gray-500">ToDorian</p>
+
+                                {/* 프로필 아이콘을 이름 오른쪽 상단에 배치 */}
+                                <img
+                                    src={IconProfile}
+                                    alt="Profile Icon"
+                                    className="absolute top-0 right-[-30px] w-6 h-6 cursor-pointer"
+                                    onClick={goToProfile} // 클릭 시 프로필로 이동
+                                />
                             </div>
-                            <div className="flex items-center space-x-2">
-                                <img src={Generic} alt="친구" className="w-6 h-6" />
-                                <p className="text-sm lg:text-base">친구 N명</p>
-                            </div>
+                        </div>
+                    </div>
+
+                    {/* 프로필 상세 정보 */}
+                    <div className="flex flex-col items-start space-y-2 mt-2">
+                        <div className="flex items-center space-x-2">
+                            <img src={clockIcon} alt="가입일" className="w-6 h-6" />
+                            <p className="text-sm lg:text-base">2024년 8월 가입</p>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <img src={Generic} alt="친구" className="w-6 h-6" />
+                            <p className="text-sm lg:text-base">친구 N명</p>
                         </div>
                     </div>
 
