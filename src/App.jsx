@@ -15,6 +15,7 @@ import Friend from './pages/friend/Friend';
 // import Guestbook from './pages/guestbook/Guestbook';
 
 import LadderGame from './pages/game/LadderGame';
+import MyPage from './pages/mypage/MyPage';
 // Import other components for routing here...
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
       {/* <Route path="/guestbook" element={<Guestbook />} /> */}
       <Route path="/game/ladder" element={<LadderGame />} />
       <Route path="/friends" element={<Friend />} />
+      <Route path="/mypage" element={<MyPage />} />
     </Routes>
   );
 }
