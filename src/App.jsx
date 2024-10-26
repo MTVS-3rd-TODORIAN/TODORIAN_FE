@@ -16,11 +16,11 @@ import MyPage from './pages/mypage/MyPage';
 import Coins from './pages/mypage/Coins';
 import Account from './pages/mypage/Account';
 
-// import Guestbook from './pages/guestbook/Guestbook';
+import Guestbook from './pages/guestbook/Guestbook';
 import LadderGame from './pages/game/LadderGame';
 import MPage from './pages/mypage/mPage';
 import Weekly from './pages/weekly/weekly';
-// Import other components for routing here...
+
 
 function App() {
   return (
@@ -34,7 +34,7 @@ function App() {
       <Route path="/calendar" element={<Weekly />} />
       <Route path="/closet" element={<Inventory />} />
       <Route path="/farm" element={<Farm />} />
-      {/* <Route path="/guestbook" element={<Guestbook />} /> */}
+      <Route path="/guestbook" element={<Guestbook />} />
       <Route path="/game/ladder" element={<LadderGame />} />
       <Route path="/friends" element={<Friend />} />
       <Route path="/mypage" element={<MPage />} />
