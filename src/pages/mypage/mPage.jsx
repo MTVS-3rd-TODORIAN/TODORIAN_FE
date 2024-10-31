@@ -11,8 +11,8 @@ import platinumMedal from '../../assets/images/myPage/platinum.png';
 import clockIcon from '../../assets/images/myPage/Clock.png';
 import Generic from '../../assets/images/myPage/Generic-avatar.png';
 import IconProfile from '../../assets/images/myPage/Icon-profile.png';
-import Price from '../../assets/images/myPage/Average-Price.png'; // 코인 아이콘 이미지
-import Money from '../../assets/images/myPage/Money-Bag.png'; // 머니 봉투 이미지
+import Coin from '../../assets/images/myPage/coin.png'; // 코인
+import Point from '../../assets/images/myPage/growing_point.png'; // 성장 포인트
 import Arrow from '../../assets/images/common/icon/arrow.png'; // 뒤로 가기 이미지 추가
 
 // 유저 프로필 이미지 컴포넌트
@@ -76,8 +76,8 @@ const MPage = () => {
                         {/* 이름과 닉네임 */}
                         <div className="flex flex-col items-start">
                             <div className="relative">
-                                <h1 className="text-2xl lg:text-3xl font-bold">투두리안</h1>
-                                <p className="text-lg lg:text-xl text-gray-500">ToDorian</p>
+                                <h1 className="text-2xl lg:text-3xl font-bold text-black">투두리안</h1>
+                                <p className="text-lg lg:text-xl text-gray-500 text-black">ToDorian</p>
 
                                 {/* 프로필 아이콘을 이름 오른쪽 상단에 배치 */}
                                 <img
@@ -94,11 +94,11 @@ const MPage = () => {
                     <div className="flex flex-col items-start space-y-2 mt-2">
                         <div className="flex items-center space-x-2">
                             <img src={clockIcon} alt="가입일" className="w-6 h-6" />
-                            <p className="text-sm lg:text-base">2024년 8월 가입</p>
+                            <p className="text-sm lg:text-base text-black">2024년 8월 가입</p>
                         </div>
                         <div className="flex items-center space-x-2">
                             <img src={Generic} alt="친구" className="w-6 h-6" />
-                            <p className="text-sm lg:text-base">친구 N명</p>
+                            <p className="text-sm lg:text-base text-black">친구 N명</p>
                         </div>
                     </div>
 
@@ -123,7 +123,7 @@ const MPage = () => {
 
                     {/* 역대 엔딩 섹션 */}
                     <div className="w-full max-w-4xl">
-                        <h2 className="text-xl lg:text-2xl font-bold mb-4">역대 엔딩</h2>
+                        <h2 className="text-xl lg:text-2xl font-bold mb-4 text-black">역대 엔딩</h2>
                         <div className="flex justify-around">
                             <UserProfileImage imageUrl={profileChick} alt="역대 엔딩" size={80} />
                             <UserProfileImage imageUrl={profileChick} alt="역대 엔딩" size={80} />
@@ -133,7 +133,7 @@ const MPage = () => {
 
                     {/* 메달 섹션 */}
                     <div className="w-full max-w-4xl">
-                        <h2 className="text-xl lg:text-2xl font-bold mb-4">메달</h2>
+                        <h2 className="text-xl lg:text-2xl font-bold mb-4 text-black">메달</h2>
                         <div className="flex justify-between">
                             <img src={bronzeMedal} alt="Bronze Medal" className="w-20 h-20 lg:w-24 lg:h-24" />
                             <img src={silverMedal} alt="Silver Medal" className="w-20 h-20 lg:w-24 lg:h-24" />
@@ -148,23 +148,23 @@ const MPage = () => {
                     {/* 코인 섹션 */}
                     <div className="flex justify-center items-center space-x-6 mb-6">
                         <div className="flex items-center space-x-2">
-                            <img src={Money} alt="머니 봉투" className="w-8 h-8" />
-                            <p className="text-xl font-bold">100</p>
+                            <img src={Point} alt="머니 봉투" className="w-8 h-8" />
+                            <p className="text-xl font-bold text-black">100</p>
                         </div>
                         <div className="flex items-center space-x-2">
-                            <img src={Price} alt="코인" className="w-8 h-8" />
-                            <p className="text-xl font-bold">100</p>
+                            <img src={Coin} alt="코인" className="w-8 h-8" />
+                            <p className="text-xl font-bold text-black">100</p>
                         </div>
                     </div>
 
                     {/* 친구 목록 */}
-                    <h2 className="text-xl lg:text-2xl font-bold">친구 목록</h2>
+                    <h2 className="text-xl lg:text-2xl font-bold text-black">친구 목록</h2>
                     <div className="border border-gray-400 rounded-lg p-4 w-full space-y-4">
                         <div className="flex items-center justify-between w-full border-b border-gray-300 pb-4">
                             <div className="flex items-center space-x-2">
                                 <UserProfileImage imageUrl={profileChick} alt="친구 이미지" size={50} />
                                 <div>
-                                    <p className="text-lg font-bold">투두리안</p>
+                                    <p className="text-lg font-bold text-black">투두리안</p>
                                     <p className="text-gray-500">@김혜진</p>
                                 </div>
                             </div>
@@ -179,7 +179,7 @@ const MPage = () => {
                             <div className="flex items-center space-x-2">
                                 <UserProfileImage imageUrl={profileChick} alt="친구 이미지" size={50} />
                                 <div>
-                                    <p className="text-lg font-bold">차은우</p>
+                                    <p className="text-lg font-bold text-black">차은우</p>
                                     <p className="text-gray-500">@은우</p>
                                 </div>
                             </div>
@@ -194,7 +194,7 @@ const MPage = () => {
                             <div className="flex items-center space-x-2">
                                 <UserProfileImage imageUrl={profileChick} alt="친구 이미지" size={50} />
                                 <div>
-                                    <p className="text-lg font-bold">배수지</p>
+                                    <p className="text-lg font-bold text-black">배수지</p>
                                     <p className="text-gray-500">@수지</p>
                                 </div>
                             </div>
