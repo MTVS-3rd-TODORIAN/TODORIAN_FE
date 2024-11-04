@@ -156,6 +156,8 @@ function Todo() {
     }
   };
 
+  const isToday = currentDate.toDateString() === new Date().toDateString();
+  
   return (
     <Container>
       <Sidebar />
@@ -165,27 +167,29 @@ function Todo() {
           <h2>{`${currentDate.getMonth() + 1}/${currentDate.getDate()}`}</h2>
           <DateButton onClick={handleNextDate}>&gt;</DateButton>
         </Header>
-
+  
         {todos.map((todo) => (
           <ChecklistItem key={todo.todoId}>
             <Checkbox
               checked={todo.completed}
               onChange={() => handleCheckboxChange(todo.todoId)}
-              disabled={todo.completed}
+              disabled={!isToday} // 오늘 날짜가 아니면 체크박스 비활성화
             />
             <TodoText checked={todo.completed}>{todo.todoContent}</TodoText>
           </ChecklistItem>
         ))}
-
-        <AddTodoContainer>
-          <AddTodoInput
-            type="text"
-            value={newTodo}
-            onChange={(e) => setNewTodo(e.target.value)}
-            placeholder="새 할 일을 입력하세요"
-          />
-          <AddTodoButton onClick={handleAddTodo}>+</AddTodoButton>
-        </AddTodoContainer>
+  
+        {isToday && ( // 오늘 날짜일 때만 할 일 추가 필드 렌더링
+          <AddTodoContainer>
+            <AddTodoInput
+              type="text"
+              value={newTodo}
+              onChange={(e) => setNewTodo(e.target.value)}
+              placeholder="새 할 일을 입력하세요"
+            />
+            <AddTodoButton onClick={handleAddTodo}>+</AddTodoButton>
+          </AddTodoContainer>
+        )}
       </ChecklistContainer>
     </Container>
   );
