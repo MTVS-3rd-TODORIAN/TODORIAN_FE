@@ -59,9 +59,39 @@ const TodoText = styled.span`
   font-weight: ${({ checked }) => (checked ? 'bold' : 'normal')};
 `;
 
+const AddTodoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+`;
+
+const AddTodoInput = styled.input`
+  width: 300px;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  margin-right: 10px;
+`;
+
+const AddTodoButton = styled.button`
+  background-color: #ff9f43;
+  border: none;
+  color: white;
+  font-size: 18px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  &:hover {
+    background-color: #ff7f00;
+  }
+`;
+
 function Todo() {
   const [todos, setTodos] = useState([]); // 할 일 목록 상태
   const [currentDate, setCurrentDate] = useState(new Date()); // 현재 날짜 상태
+  const [newTodo, setNewTodo] = useState(''); // 새 할 일 입력 상태
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -75,64 +105,91 @@ function Todo() {
     };
   
     fetchTodos(); // 날짜가 변경될 때마다 데이터 가져오기
-  }, [currentDate]); // currentDate가 변경될 때마다 useEffect 실행
-  
-  // 날짜 변경 함수
+  }, [currentDate]);
+
   const handlePrevDate = () => {
     setCurrentDate(prevDate => {
-      const newDate = new Date(prevDate); // 새로운 Date 객체 생성
-      newDate.setDate(prevDate.getDate() - 1); // 날짜를 1일 이전으로 설정
+      const newDate = new Date(prevDate);
+      newDate.setDate(prevDate.getDate() - 1);
       return newDate;
     });
   };
-  
+
   const handleNextDate = () => {
     setCurrentDate(prevDate => {
-      const newDate = new Date(prevDate); // 새로운 Date 객체 생성
-      newDate.setDate(prevDate.getDate() + 1); // 날짜를 1일 이후로 설정
+      const newDate = new Date(prevDate);
+      newDate.setDate(prevDate.getDate() + 1);
       return newDate;
     });
   };
 
   const handleCheckboxChange = async (id) => {
     try {
-        // API 호출
-        const response = await axiosInstance.post(`/todo/${id}/complete`);
-        console.log(response.data); // API 응답 확인
+      const response = await axiosInstance.post(`/todo/${id}/complete`);
+      console.log(response.data); // API 응답 확인
 
-        // 성공적으로 완료되면 상태 업데이트
-        setTodos((prevTodos) =>
-            prevTodos.map((todo) =>
-                todo.todoId === id && !todo.completed
-                    ? { ...todo, completed: true }
-                    : todo
-            )
-        );
+      setTodos((prevTodos) =>
+        prevTodos.map((todo) =>
+          todo.todoId === id && !todo.completed
+            ? { ...todo, completed: true }
+            : todo
+        )
+      );
     } catch (error) {
-        console.error('Failed to complete todo:', error);
+      console.error('Failed to complete todo:', error);
     }
   };
 
+  const handleAddTodo = async () => {
+    if (newTodo.trim() === '') return; // 빈 문자열이면 아무것도 하지 않음
+
+    try {
+      // 새로운 할 일 추가 API 호출
+      const response = await axiosInstance.post('/todo/save', { todoContent: newTodo });
+      const addedTodo = response.data.response; // 응답에서 할 일 객체 추출
+
+      // 새로운 할 일을 기존 목록에 추가
+      setTodos((prevTodos) => [...prevTodos, addedTodo]);
+      setNewTodo(''); // 입력 필드 초기화
+    } catch (error) {
+      console.error('Failed to save new todo:', error);
+    }
+  };
+
+  const isToday = currentDate.toDateString() === new Date().toDateString();
+  
   return (
     <Container>
-      <Sidebar/>
+      <Sidebar />
       <ChecklistContainer>
         <Header>
-          <DateButton onClick={handlePrevDate}>&lt;</DateButton> {/* 전날 버튼 */}
-          <h2>{`${currentDate.getMonth() + 1}/${currentDate.getDate()}`}</h2> {/* 상태에 저장된 날짜 표시 */}
-          <DateButton onClick={handleNextDate}>&gt;</DateButton> {/* 다음 날 버튼 */}
+          <DateButton onClick={handlePrevDate}>&lt;</DateButton>
+          <h2>{`${currentDate.getMonth() + 1}/${currentDate.getDate()}`}</h2>
+          <DateButton onClick={handleNextDate}>&gt;</DateButton>
         </Header>
-
+  
         {todos.map((todo) => (
           <ChecklistItem key={todo.todoId}>
-              <Checkbox
-                checked={todo.completed}
-                onChange={() => handleCheckboxChange(todo.todoId)}
-                disabled={todo.completed} // 체크된 항목은 비활성화
-              />
-              <TodoText checked={todo.completed}>{todo.todoContent}</TodoText>
-            </ChecklistItem>
+            <Checkbox
+              checked={todo.completed}
+              onChange={() => handleCheckboxChange(todo.todoId)}
+              disabled={!isToday} // 오늘 날짜가 아니면 체크박스 비활성화
+            />
+            <TodoText checked={todo.completed}>{todo.todoContent}</TodoText>
+          </ChecklistItem>
         ))}
+  
+        {isToday && ( // 오늘 날짜일 때만 할 일 추가 필드 렌더링
+          <AddTodoContainer>
+            <AddTodoInput
+              type="text"
+              value={newTodo}
+              onChange={(e) => setNewTodo(e.target.value)}
+              placeholder="새 할 일을 입력하세요"
+            />
+            <AddTodoButton onClick={handleAddTodo}>+</AddTodoButton>
+          </AddTodoContainer>
+        )}
       </ChecklistContainer>
     </Container>
   );
