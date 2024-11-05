@@ -21,7 +21,8 @@ import LadderGame from './pages/game/LadderGame';
 import MPage from './pages/mypage/mPage';
 import Weekly from './pages/weekly/weekly';
 import Bob from './pages/bob/Bob';
-
+import FriendProfile from './pages/friend/FriendProfile';
+import GuestbookWrite  from './pages/guestbook/GuestbookWrite';
 
 function App() {
   return (
@@ -43,6 +44,8 @@ function App() {
       <Route path="/my-page" element={<MyPage />} />
       <Route path="/coins" element={<Coins />} />
       <Route path="/account" element={<Account />} />
+      <Route path="/friend/:friendId" element={<FriendProfile />} /> {/* 친구 프로필 페이지 경로 추가 */}
+      <Route path="/guestbook/write" element={<GuestbookWrite />} /> 
     </Routes>
   );
 }

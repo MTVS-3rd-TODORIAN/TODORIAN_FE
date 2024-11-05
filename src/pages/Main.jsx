@@ -16,7 +16,7 @@ const Main = () => {
           <MenuButton onClick={() => navigate('/today-deal')}>오늘의 할일</MenuButton>
           <MenuButton onClick={() => navigate('/calendar')}>달력</MenuButton>
           <MenuButton onClick={() => navigate('/feed')}>밥 주러 가기</MenuButton>
-          <MenuButton onClick={() => navigate('/my-page')}>마이 페이지</MenuButton>
+          <MenuButton onClick={() => navigate('/mypage')}>프로필</MenuButton>
         </MenuButtonContainer>
         <ChickContainer>
           <ChickImage src={ChickImg} alt="Chick" />

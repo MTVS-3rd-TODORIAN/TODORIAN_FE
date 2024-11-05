@@ -163,7 +163,7 @@ const Sidebar = () => {
         <ProfileImage src={profileImg} alt="Profile" onClick={toggleDropdown} />
         <Nickname onClick={toggleDropdown}>{nickname || '닉네임 로딩 중...'}</Nickname> {/* 닉네임 출력 */}
         <DropdownMenu $show={showDropdown}>
-          <DropdownButton onClick={() => navigate('/mypage')}>마이 페이지</DropdownButton>
+          <DropdownButton onClick={() => navigate('/mypage')}>프로필</DropdownButton>
           <DropdownButton onClick={() => navigate('/feed')}>밥 주러 가기</DropdownButton>
           <DropdownButton onClick={() => navigate('/closet')}>옷장 가기</DropdownButton>
           <DropdownButton onClick={handleLogout}>로그아웃</DropdownButton>
