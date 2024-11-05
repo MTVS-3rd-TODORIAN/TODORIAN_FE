@@ -20,6 +20,8 @@ import Point from '../../assets/images/myPage/growing_point.png';
 import Arrow from '../../assets/images/common/icon/arrow.png';
 import PeopleIcon from '../../assets/images/myPage/people-icon.png'; // 친구 관리 아이콘
 
+import { getTotalCoinAmountOfMember } from "../../api/coin"; 
+
 // 유저 프로필 이미지 컴포넌트
 const UserProfileImage = ({ imageUrl, alt, size }) => (
     <img className="rounded-full" src={imageUrl} alt={alt} style={{ width: size, height: size }} />
@@ -43,11 +45,25 @@ const MPage = () => {
     const [friendRequestStatus, setFriendRequestStatus] = useState('친구 신청');
     const [joinDate, setJoinDate] = useState(''); // 가입일 상태
     const [friendCount, setFriendCount] = useState(0); // 친구 수 상태
+    const [totalCoins, setTotalCoins] = useState(0);
 
     // 백엔드에서 가입일 및 친구 수 가져오기
     useEffect(() => {
         const fetchUserData = async () => {
             try {
+
+                const fetchTotalCoins = async () => {
+                    try {
+                      const coins = await getTotalCoinAmountOfMember();
+                      setTotalCoins(coins);
+                    } catch (error) {
+                      console.error('Failed to fetch total coin amount:', error);
+                    } finally {
+                      setLoadingCoins(false);
+                    }
+                  };
+                  fetchTotalCoins();
+                  
                 // 가입일 데이터 가져오기
                 // const joinDateResponse = await fetch('/api/user/join-date');
                 // const joinDateData = await joinDateResponse.json();
@@ -246,7 +262,7 @@ const MPage = () => {
                         </div>
                         <div className="flex items-center space-x-2">
                             <img src={Coin} alt="코인" className="w-8 h-8" />
-                            <p className="text-xl font-bold text-black">100</p>
+                            <p className="text-xl font-bold text-black">{totalCoins}</p>
                         </div>
                     </div>
 
