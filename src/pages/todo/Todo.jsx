@@ -7,6 +7,7 @@ import axiosInstance from '../../axios/AxiosInstance';
 const Container = styled.div`
   display: flex;
   background-color: #f8f4ef;
+  color: #000000;
   height: 100vh;
   width: 100vw;
 `;
