@@ -20,6 +20,7 @@ import Guestbook from './pages/guestbook/Guestbook';
 import LadderGame from './pages/game/LadderGame';
 import MPage from './pages/mypage/mPage';
 import Weekly from './pages/weekly/weekly';
+import Bob from './pages/bob/Bob';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
       <Route path="/calendar" element={<Weekly />} />
       <Route path="/closet" element={<Inventory />} />
       <Route path="/farm" element={<Farm />} />
+      <Route path="/feed" element={<Bob />} />
       <Route path="/guestbook" element={<Guestbook />} />
       <Route path="/game/ladder" element={<LadderGame />} />
       <Route path="/friends" element={<Friend />} />
