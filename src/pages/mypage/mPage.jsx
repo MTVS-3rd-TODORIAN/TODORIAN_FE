@@ -294,6 +294,10 @@ const MPage = () => {
                                 />
                             </div>
                         ))}
+                        {/* 추가 친구 목록 */}
+                        <p className="text-center text-blue-600 cursor-pointer" onClick={openFriendListModal}>
+                            N명 더 보기
+                        </p>
                     </div>
                 </div>
             </div>
