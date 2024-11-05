@@ -250,6 +250,12 @@ const MPage = () => {
                         </div>
                     </div>
 
+                    <StyledButton
+                        text="코인 내역 조회"
+                        bgColor="bg-[#f1a545]"
+                        onClick={() => navigate('/coins')}
+                    />
+
                     <h2 className="text-xl lg:text-2xl font-bold text-black">친구 목록</h2>
                     <div className="border border-gray-400 rounded-lg p-4 w-full space-y-4">
                         {displayedFriends.map((friend, index) => (

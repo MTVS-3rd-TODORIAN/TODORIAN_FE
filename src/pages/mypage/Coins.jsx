@@ -142,15 +142,6 @@ const Coins = () => {
             </SidebarStyled>
 
             <Content>
-                <Header>
-                    <MenuContainer>
-                        <MenuItem onClick={() => handleMenuClick('/coins')}>코인</MenuItem>
-                        <MenuItem onClick={() => handleMenuClick('/account')}>계정</MenuItem>
-                        <MenuItem onClick={() => handleMenuClick('/settings')}>설정</MenuItem>
-                        <MenuItem onClick={() => handleMenuClick('/notifications')}>알림</MenuItem>
-                        <MenuItem onClick={() => handleMenuClick('/help')}>도움말</MenuItem>
-                    </MenuContainer>
-                </Header>
 
                 <CoinListContainer>
                     {loading ? (
