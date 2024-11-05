@@ -103,6 +103,7 @@ const Coins = () => {
     const [coinData, setCoinData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    
 
     useEffect(() => {
         const fetchCoinData = async () => {
@@ -142,7 +143,6 @@ const Coins = () => {
             </SidebarStyled>
 
             <Content>
-
                 <CoinListContainer>
                     {loading ? (
                         <div>로딩 중...</div>
