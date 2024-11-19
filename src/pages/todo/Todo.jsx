@@ -93,6 +93,7 @@ function Todo() {
   const [todos, setTodos] = useState([]); // 할 일 목록 상태
   const [currentDate, setCurrentDate] = useState(new Date()); // 현재 날짜 상태
   const [newTodo, setNewTodo] = useState(''); // 새 할 일 입력 상태
+  const [showNotification, setShowNotification] = useState(false);
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -125,6 +126,12 @@ function Todo() {
   };
 
   const handleCheckboxChange = async (id) => {
+    const todo = todos.find((t) => t.todoId === id); // 체크하려는 할 일 찾기
+    if (todo.completed) {
+      // 이미 완료된 경우 아무 작업도 하지 않음
+      return;
+    }
+
     try {
       const response = await axiosInstance.post(`/todo/${id}/complete`);
       console.log(response.data); // API 응답 확인
@@ -136,6 +143,10 @@ function Todo() {
             : todo
         )
       );
+
+        // 알림 표시
+      setShowNotification(true);
+      setTimeout(() => setShowNotification(false), 3000); // 3초 후 알림 숨김
     } catch (error) {
       console.error('Failed to complete todo:', error);
     }
@@ -143,6 +154,10 @@ function Todo() {
 
   const handleAddTodo = async () => {
     if (newTodo.trim() === '') return; // 빈 문자열이면 아무것도 하지 않음
+    if (todos.length >= 10) { // 총 갯수 10개 제한
+      alert('할 일은 최대 10개까지만 추가할 수 있습니다.');
+      return;
+    }
 
     try {
       // 새로운 할 일 추가 API 호출
@@ -190,6 +205,21 @@ function Todo() {
             />
             <AddTodoButton onClick={handleAddTodo}>+</AddTodoButton>
           </AddTodoContainer>
+        )}
+        {showNotification && (
+          <div
+            style={{
+              position: 'fixed',
+              bottom: '20px',
+              backgroundColor: '#ffd700',
+              padding: '10px',
+              borderRadius: '5px',
+              fontSize: '16px',
+              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+            }}
+          >
+            성장 포인트를 획득하였습니다!
+          </div>
         )}
       </ChecklistContainer>
     </Container>
