@@ -22,7 +22,8 @@ import MPage from './pages/mypage/mPage';
 import Weekly from './pages/weekly/weekly';
 import Bob from './pages/bob/Bob';
 import FriendProfile from './pages/friend/FriendProfile';
-import GuestbookWrite  from './pages/guestbook/GuestbookWrite';
+import GuestbookWrite from './pages/guestbook/GuestbookWrite';
+import FriendManagement from './pages/friend/FriendManagement';
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
       <Route path="/account" element={<Account />} />
       <Route path="/friend/:friendId" element={<FriendProfile />} /> {/* 친구 프로필 페이지 경로 추가 */}
       <Route path="/guestbook/write" element={<GuestbookWrite />} /> 
+      <Route path="/friend-management" element={<FriendManagement />} />
     </Routes>
   );
 }
