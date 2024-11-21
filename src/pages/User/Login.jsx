@@ -42,13 +42,13 @@ const Login = () => {
           <ChickImage src={ChickImg} alt="Chick" />
           <Input
             type="email"
-            placeholder="Email"
+            placeholder="이메일"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <Input
             type="password"
-            placeholder="Password"
+            placeholder="비밀번호"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -56,7 +56,6 @@ const Login = () => {
           <SignupText onClick={handleSignup}>회원가입</SignupText>
         </InputForm>
       </LoginForm>
-
       <ErrorModal isOpen={isModalOpen} onClose={closeModal} message={errorMessage} />
     </LoginContainer>
   );

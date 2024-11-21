@@ -5,15 +5,28 @@ import styled from 'styled-components';
 import ErrorModal from '../../components/ErrorModal';
 
 const AdminLogin = () => {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const navigate = useNavigate();
 
     const handleLogin = async () => {
-      // Login logic here (e.g., API call)
-        console.log('Logging in with:', { username, password });
-      // Navigate to admin dashboard after successful login
-        navigate('/admin/dashboard');
+        try {
+            const res = await login(email, password);
+            console.log('Login success: ', res);
+            navigate('/admin/dashboard');
+        } catch (err) {
+            console.error('Login failed: ', err);
+            if (err?.response?.statue === 403) {
+                setErrorMessage(err.response.data.error.message);
+                setIsModalOpen(true);
+            }
+        }
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
     };
 
     return (
@@ -22,9 +35,9 @@ const AdminLogin = () => {
             <LoginForm>
             <Input
             type="text"
-            placeholder="아이디"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            placeholder="이메일"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             />
             <Input
             type="password"
@@ -34,6 +47,7 @@ const AdminLogin = () => {
             />
             <LoginButton onClick={handleLogin}>로그인</LoginButton>
             </LoginForm>
+            <ErrorModal isOpen={isModalOpen} onClose={closeModal} message={errorMessage} />
         </Container>
     );
 };
