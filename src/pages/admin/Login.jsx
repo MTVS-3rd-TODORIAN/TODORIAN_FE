@@ -15,7 +15,7 @@ const AdminLogin = () => {
         try {
             const res = await login(email, password);
             console.log('Login success: ', res);
-            navigate('/admin/dashboard');
+            navigate('/admin/points');
         } catch (err) {
             console.error('Login failed: ', err);
             if (err?.response?.statue === 403) {

@@ -96,7 +96,7 @@ const DropdownButton = styled(SidebarButton)`
     margin: 5px 0;
 `;
 
-const Sidebar = () => {
+const AdminSidebar = () => {
     const navigate = useNavigate();
     const [showDropdown, setShowDropdown] = useState(false);
     const [nickname, setNickname] = useState(''); // 닉네임 상태 추가
@@ -151,21 +151,15 @@ const Sidebar = () => {
     return (
         <SidebarContainer>
         <LogoContainer>
-            <Logo src={logoImg} onClick={() => navigate('/main')} alt="Logo" />
-            <SidebarButton onClick={() => navigate('/today-deal')}>오늘의 할일</SidebarButton>
-            <SidebarButton onClick={() => navigate('/calendar')}>달력 확인</SidebarButton>
-            <SidebarButton onClick={() => navigate('/farm')}>농장 가기</SidebarButton>
-            <SidebarButton onClick={() => navigate('/store')}>상점 방문</SidebarButton>
-            <SidebarButton onClick={() => navigate('/game')}>게임 하러 가기</SidebarButton>
+            <Logo src={logoImg} onClick={() => navigate('/admin/main')} alt="Logo" />
+            <SidebarButton onClick={() => navigate('/admin/points')}>포인트 정책</SidebarButton>
+            <SidebarButton onClick={() => navigate('/admin/character')}>캐릭터 정책</SidebarButton>
         </LogoContainer>
 
         <ProfileSection ref={dropdownRef}>
             <ProfileImage src={profileImg} alt="Profile" onClick={toggleDropdown} />
             <Nickname onClick={toggleDropdown}>{nickname || '닉네임 로딩 중...'}</Nickname> {/* 닉네임 출력 */}
             <DropdownMenu $show={showDropdown}>
-            <DropdownButton onClick={() => navigate('/mypage')}>프로필</DropdownButton>
-            <DropdownButton onClick={() => navigate('/feed')}>밥 주러 가기</DropdownButton>
-            <DropdownButton onClick={() => navigate('/closet')}>옷장 가기</DropdownButton>
             <DropdownButton onClick={handleLogout}>로그아웃</DropdownButton>
             </DropdownMenu>
         </ProfileSection>
@@ -173,4 +167,4 @@ const Sidebar = () => {
     );
 };
 
-export default Sidebar;
+export default AdminSidebar;
