@@ -25,6 +25,8 @@ import FriendProfile from './pages/friend/FriendProfile';
 import GuestbookWrite from './pages/guestbook/GuestbookWrite';
 import FriendManagement from './pages/friend/FriendManagement';
 
+import AdminLogin from './pages/admin/Login';
+
 function App() {
   return (
     <Routes>
@@ -48,6 +50,7 @@ function App() {
       <Route path="/friend/:friendId" element={<FriendProfile />} /> {/* 친구 프로필 페이지 경로 추가 */}
       <Route path="/guestbook/write" element={<GuestbookWrite />} /> 
       <Route path="/friend-management" element={<FriendManagement />} />
+      <Route path='/admin/login' element={<AdminLogin />} />
     </Routes>
   );
 }
