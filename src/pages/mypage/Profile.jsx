@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import Sidebar from "../../components/Sidebar";
 import { useNavigate } from "react-router-dom";
 
-import Arrow from '../../assets/images/common/icon/arrow.png';
-import Eye from '../../assets/images/common/icon/eye.png';
-import Pencil from '../../assets/images/common/icon/pencil.png';
-import Close from '../../assets/images/common/icon/close.png';
+import Arrow from "../../assets/images/common/icon/arrow.png";
+import Eye from "../../assets/images/common/icon/eye.png";
+import Pencil from "../../assets/images/common/icon/pencil.png";
+import Close from "../../assets/images/common/icon/close.png";
 
 const Profile = () => {
     const [nickname, setNickname] = useState(""); // 닉네임 상태
-    const [email, setEmail] = useState("user@example.com"); // 이메일 상태
     const [currentPassword, setCurrentPassword] = useState(""); // 현재 비밀번호 상태
     const [newPassword, setNewPassword] = useState(""); // 새 비밀번호 상태
     const [confirmPassword, setConfirmPassword] = useState(""); // 새 비밀번호 확인 상태
@@ -59,7 +58,6 @@ const Profile = () => {
 
         const formData = {
             nickname,
-            email,
             currentPassword,
             newPassword,
             profileImage,
@@ -97,7 +95,10 @@ const Profile = () => {
 
                 {/* 프로필 사진 */}
                 <div className="flex justify-center items-center mb-6 relative">
-                    <div className="w-24 h-24 md:w-32 md:h-32 bg-[#d9d9d9] rounded-full overflow-hidden relative">
+                    <div
+                        className="w-24 h-24 md:w-32 md:h-32 bg-[#d9d9d9] rounded-full overflow-hidden relative"
+                        style={{ overflow: "visible", position: "relative", zIndex: 5 }}
+                    >
                         {profileImage ? (
                             <img
                                 src={profileImage}
@@ -109,7 +110,10 @@ const Profile = () => {
                                 이미지 없음
                             </span>
                         )}
-                        <label className="absolute top-1 right-1 p-1 bg-gray-300 rounded-full shadow cursor-pointer">
+                        <label
+                            className="absolute top-1 right-1 p-1 bg-gray-300 rounded-full shadow cursor-pointer"
+                            style={{ zIndex: 10 }}
+                        >
                             <input
                                 type="file"
                                 accept="image/*"
@@ -120,33 +124,23 @@ const Profile = () => {
                                 src={Pencil}
                                 alt="프로필 변경"
                                 className="w-5 h-5"
+                                style={{ zIndex: 11, position: "relative" }}
                             />
                         </label>
                     </div>
                 </div>
 
                 {/* 이메일 */}
-                <div className="mb-4 relative">
+                <div className="mb-4">
                     <label className="block text-sm md:text-base font-semibold mb-1 text-black">
                         이메일
                     </label>
-                    <div className="relative">
-                        <input
-                            type="text"
-                            value={email}
-                            onChange={(e) => {
-                                setEmail(e.target.value);
-                                setIsChanged(true); // 변경 상태 설정
-                            }}
-                            className="w-full bg-gray-100 text-black rounded px-3 py-2"
-                        />
-                        <button
-                            onClick={() => setEmail("")}
-                            className="absolute right-3 top-1/2 transform -translate-y-1/2"
-                        >
-                            <img src={Close} alt="초기화" className="w-5 h-5" />
-                        </button>
-                    </div>
+                    <input
+                        type="text"
+                        value="user@example.com"
+                        readOnly
+                        className="w-full bg-gray-200 text-gray-600 rounded px-3 py-2"
+                    />
                 </div>
 
                 {/* 닉네임 */}
