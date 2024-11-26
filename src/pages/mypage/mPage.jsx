@@ -141,7 +141,8 @@ const MPage = () => {
     const displayedFriends = [
         { profileImage: profileChick, nickname: '투두리안', userId: 'kim_hyejin' },
         { profileImage: profileChick, nickname: '차은우', userId: 'cha_eunwoo' },
-        { profileImage: profileChick, nickname: '배수지', userId: 'bae_suzy' }
+        { profileImage: profileChick, nickname: '배수지', userId: 'bae_suzy' },
+        { profileImage: profileChick, nickname: 'todorian', userId: 'todorian' }
     ];
 
     return (

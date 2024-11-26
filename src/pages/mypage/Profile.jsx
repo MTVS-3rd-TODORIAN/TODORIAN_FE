@@ -137,7 +137,7 @@ const Profile = () => {
                     </label>
                     <input
                         type="text"
-                        value="user@example.com"
+                        value="todorian@gmail.com"
                         readOnly
                         className="w-full bg-gray-200 text-gray-600 rounded px-3 py-2"
                     />
