@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Sidebar from '../../components/Sidebar';
 import axiosInstance from '../../axios/AxiosInstance';
+import characterImage1 from '../../assets/images/character1.png';
+import characterImage2 from '../../assets/images/character2.png';
+import characterImage3 from '../../assets/images/character3.png';
+import characterImage4 from '../../assets/images/character4.png';
 
 const Container = styled.div`
   display: flex;
@@ -101,6 +105,8 @@ function Bob() {
       level: 1, // 초기 단계
       remainingPoints: 0 // 초기 성장 포인트
     });
+    const [currentCharacterImage, setCurrentCharacterImage] = useState(characterImage1);
+    const characterImages = [characterImage1, characterImage2, characterImage3, characterImage4]; 
   
     useEffect(() => {
       const fetchCharacterData = async () => {
@@ -144,6 +150,8 @@ function Bob() {
           remainingPoints: Math.max(newRemainingPoints, 0)
         };
       });
+      const randomIndex = Math.floor(Math.random() * characterImages.length);
+      setCurrentCharacterImage(characterImages[randomIndex]);
     };
   
     return (
@@ -151,7 +159,7 @@ function Bob() {
         <Sidebar />
         <Content>
           <CharacterName>{character.name}</CharacterName>
-          <CharacterImage src="\src\assets\images\mainPage\mainChick.png" alt="Character" /> {/* 실제 이미지 경로로 변경 */}
+          <CharacterImage src={currentCharacterImage} alt="Character" />
           <InfoContainer>
             <GrowthPoints>남은 성장 포인트 {character.remainingPoints}</GrowthPoints>
             <FoodIcon />

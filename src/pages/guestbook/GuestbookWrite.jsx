@@ -19,7 +19,7 @@ const GuestbookWrite = () => {
                 // setUsername(data.username);
 
                 // 임시 데이터로 설정
-                setUsername('사용자닉네임');
+                setUsername('todorian');
             } catch (error) {
                 console.error('사용자 데이터를 불러오는 중 오류가 발생했습니다.', error);
             }
@@ -41,7 +41,7 @@ const GuestbookWrite = () => {
             });
 
             // 저장 후 방명록 페이지로 이동
-            navigate('/guestbook');
+            navigate('/guestbook2');
         } catch (error) {
             console.error('방명록을 저장하는 중 오류가 발생했습니다.', error);
         }

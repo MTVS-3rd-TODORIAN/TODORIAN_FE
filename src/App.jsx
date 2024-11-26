@@ -28,6 +28,7 @@ import FriendManagement from './pages/friend/FriendManagement';
 import AdminLogin from './pages/admin/Login';
 import AdminPoints from './pages/admin/Points';
 import Profile from './pages/mypage/Profile';
+import GuestbookPage2 from './pages/guestbook/Guestbook2';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
       <Route path="/farm" element={<Farm />} />
       <Route path="/feed" element={<Bob />} />
       <Route path="/guestbook" element={<Guestbook />} />
+      <Route path="/guestbook2" element={<GuestbookPage2 />} />
       <Route path="/game/ladder" element={<LadderGame />} />
       <Route path="/friends" element={<Friend />} />
       <Route path="/mypage" element={<MPage />} />

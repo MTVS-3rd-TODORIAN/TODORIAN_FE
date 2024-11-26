@@ -18,7 +18,7 @@ const postsPerPage = 6; // Number of posts per page | 페이지당 포스트 수
 const totalPosts = 60; // Total number of posts | 전체 포스트 수
 const totalPages = Math.ceil(totalPosts / postsPerPage); // Calculate total pages | 전체 페이지 수 계산
 
-const GuestbookPage = () => {
+const GuestbookPage2 = () => {
     const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(1); // Current page state | 현재 페이지 상태
     const segmentWidth = 100 / (totalPages - 1); // Width of each segment for smooth distribution | 진행 바에서 각 구간의 너비
@@ -31,6 +31,14 @@ const GuestbookPage = () => {
     // Function to fetch posts (Placeholder for backend integration) | 게시물 가져오는 함수 (백엔드 연동 예정)
     const fetchPosts = () => {
         return [
+            {
+                id: 1,
+                message: '안녕하세요 ㅎㅎ',
+                username: 'todorian',
+                date: '2024.11.26',
+                profileImage: null,
+                pin: YellowPin,
+            },
             {
                 id: 2,
                 message: '멋진 방명록 페이지네요!',
@@ -276,4 +284,4 @@ const GuestbookPage = () => {
     );
 };
 
-export default GuestbookPage;
+export default GuestbookPage2;
