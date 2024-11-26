@@ -27,6 +27,7 @@ import FriendManagement from './pages/friend/FriendManagement';
 
 import AdminLogin from './pages/admin/Login';
 import AdminPoints from './pages/admin/Points';
+import Profile from './pages/mypage/Profile';
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
       <Route path="/friend-management" element={<FriendManagement />} />
       <Route path='/admin/login' element={<AdminLogin />} />
       <Route path='/admin/points' element={<AdminPoints />} />
+      <Route path='/profile' element={<Profile />} />
     </Routes>
   );
 }
